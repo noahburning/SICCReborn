@@ -11,6 +11,8 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.17'
 targetCompatibility = '1.17'
 
+sourceSets.main.java.srcDirs += ['src']
+
 repositories {
 	mavenCentral()
 }
