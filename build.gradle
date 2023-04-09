@@ -11,19 +11,31 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.17'
 targetCompatibility = '1.17'
 
-sourceSets.main.java.srcDirs += ['src']
+sourceSets {
+
+	main {
+		java {
+			srcDirs = ['src/main/java']
+		}	
+	}
+
+	test {
+		java { 
+			srcDirs = ['src/test/java']
+		}
+		
+	}
+
+}
 
 repositories {
 	mavenCentral()
 }
-	
 
 dependencies {
 	implementation 'com.mysql:mysql-connector-j:8.0.32'
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+	testImplementation 'org.junit.jupiter:junit-jupiter'
 }
