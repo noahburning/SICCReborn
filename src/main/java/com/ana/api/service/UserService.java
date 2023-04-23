@@ -18,4 +18,9 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    @Transactional
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
 }
