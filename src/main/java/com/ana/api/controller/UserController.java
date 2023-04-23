@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -24,14 +26,9 @@ public class UserController {
 
     @GetMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getByUsername(@PathVariable("username") String username) {
-        User user = userService.getByUsername(username);
+        Optional<User> user = userService.getByUsername(username);
 
-        if(user != null) {
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }
