@@ -1,5 +1,6 @@
-package com.ana.tests.api;
+package com.ana.api;
 
+import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,10 +10,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@SpringBootTest
 @AutoConfigureMockMvc
 @SpringJUnitConfig
+@SpringBootTest(classes=com.ana.api.Application.class)
 public class HelloTest {
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Autowired
     private MockMvc mockMvc;
@@ -23,5 +27,8 @@ public class HelloTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Hello, world!"));
     }
+
+
+
 
 }
