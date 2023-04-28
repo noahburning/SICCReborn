@@ -1,5 +1,9 @@
 package com.ana.client.gui;
 
+import com.ana.client.model.LoginModel;
+import com.ana.client.model.impl.LoginModelImpl;
+import com.ana.client.presenter.LoginPresenter;
+import com.ana.client.presenter.impl.LoginPresenterImpl;
 import com.ana.client.view.LoginView;
 import com.ana.client.view.impl.LoginViewImpl;
 import org.springframework.http.HttpEntity;
@@ -32,7 +36,14 @@ public class ClientFrame extends JFrame {
         this.navigator = new Navigator(this);
         clientExitHandler();
         init();
+        addLoginView();
+    }
+
+    private void addLoginView() {
         LoginView loginView = new LoginViewImpl();
+        LoginModel loginModel = new LoginModelImpl(new RestTemplate(), BASE_URL.concat("/login"));
+        LoginPresenter loginPresenter = new LoginPresenterImpl(loginModel, loginView);
+
         navigator.addView(ViewType.LOGIN.toString(), (JPanel) loginView);
         navigator.showView(ViewType.LOGIN.toString());
         navigator.showView(ViewType.LOGIN.toString());
