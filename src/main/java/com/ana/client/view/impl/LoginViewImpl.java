@@ -59,12 +59,10 @@ public class LoginViewImpl extends JPanel implements LoginView {
 
     @Override
     public void addLoginListener(LoginListener listener) {
-        loginButton.addActionListener(
-                e -> {
-                    listener.onLogin(getUsername(), getPassword());
-                    clearInputs();
-                }
-        );
+        loginButton.addActionListener(e -> {
+            listener.onLogin(getUsername(), getPassword());
+            clearInputs();
+        });
     }
 
 }

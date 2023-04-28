@@ -33,7 +33,8 @@ public class User {
     @Column(name = "manager_id")
     private long managerId;
 
-    public User() {}
+    public User() {
+    }
 
     public User(long id, String username) {
         this.id = id;
@@ -114,6 +115,7 @@ public class User {
     public void setManagerId(long managerId) {
         this.managerId = managerId;
     }
+
     @Override
     public String toString() {
         return "User {id=" + id + ", firstName=" + firstName + ", middleInitial=" + middleInitial + ", lastName=" + lastName + ", username=" + username + ", password=" + password + ", isManager=" + isManager + "}";

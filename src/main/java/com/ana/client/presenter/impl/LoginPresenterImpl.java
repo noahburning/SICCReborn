@@ -26,10 +26,10 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
         String usernameInput = loginView.getUsername();
         String passwordInput = loginView.getPassword();
 
-        if(!loginModel.validateCredentials(usernameInput, passwordInput)) {
+        if (!loginModel.validateCredentials(usernameInput, passwordInput)) {
             loginView.showErrorMessage("Invalid credentials!");
             loginView.clearInputs();
-        } else if(!loginModel.login(usernameInput, passwordInput)) {
+        } else if (!loginModel.login(usernameInput, passwordInput)) {
             loginView.showErrorMessage("Login failed!");
         } else {
             loginView.showSuccessMessage("Login successful!");

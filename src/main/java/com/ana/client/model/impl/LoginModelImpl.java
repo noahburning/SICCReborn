@@ -17,6 +17,7 @@ public class LoginModelImpl implements LoginModel {
     /**
      * Validates that username is between 6 and 30 characters and contains only letters, numbers, underscores, and hyphens
      * and that password is between 8 and 30 characters and contains at least one uppercase letter, one lowercase letter, and one digit.
+     *
      * @param username Username to validate
      * @param password Password to validate
      * @return True if username and password are valid, false otherwise
