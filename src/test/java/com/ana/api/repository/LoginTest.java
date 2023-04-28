@@ -1,15 +1,15 @@
 package com.ana.api.repository;
-import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.fail;
-import java.sql.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.*;
 
-@SpringBootTest(classes=com.ana.api.Application.class)
-public class loginTest {
+import static org.junit.jupiter.api.Assertions.fail;
+
+@SpringBootTest
+public class LoginTest {
 
     @Test
     @DisplayName("Test successful login")
@@ -70,4 +70,5 @@ public class loginTest {
             fail("SQL error occurred: " + e.getMessage());
         }
     }
+
 }
