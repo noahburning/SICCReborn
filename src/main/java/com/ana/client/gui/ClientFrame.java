@@ -1,23 +1,54 @@
-package com.ana.client;
+package com.ana.client.gui;
 
+import com.ana.client.view.LoginView;
+import com.ana.client.view.impl.LoginViewImpl;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class App extends JFrame {
+/**
+ * A class that creates the main window of the client.
+ * The window is used to display the views.
+ * The window also handles the exit of the client.
+ * {@code @copyright}  Copyright (c) 2023
+ * @author Ali Ahmed
+ */
+public class ClientFrame extends JFrame {
+
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String WINDOW_TITLE = "Super Innovative Cookie Code";
     private static final String BASE_URL = "http://localhost:8080";
     private static final String EXIT_ENDPOINT = BASE_URL + "/exit";
 
-    public App() {
-        super(WINDOW_TITLE);
+    protected final Navigator navigator;
 
+    public ClientFrame() {
+        this.navigator = new Navigator(this);
+        clientExitHandler();
+        init();
+        LoginView loginView = new LoginViewImpl();
+        navigator.addView(ViewType.LOGIN.toString(), (JPanel) loginView);
+        navigator.showView(ViewType.LOGIN.toString());
+        navigator.showView(ViewType.LOGIN.toString());
+    }
+
+    private void init() {
+        super.setTitle(WINDOW_TITLE);
+        super.setResizable(true);
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setMinimumSize(new Dimension(800, 600));
+        super.setLocationRelativeTo(null);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.setVisible(true);
+    }
+
+    private void clientExitHandler() {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -37,13 +68,6 @@ public class App extends JFrame {
                 super.windowClosing(e);
             }
         });
-
-        setSize(800, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(App::new);
-    }
 }
