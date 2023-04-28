@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @AutoConfigureMockMvc
 @SpringJUnitConfig
-@SpringBootTest(classes=com.ana.api.Application.class)
+@SpringBootTest
 public class HelloTest {
 
     @Autowired
@@ -27,8 +27,5 @@ public class HelloTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Hello, world!"));
     }
-
-
-
 
 }
