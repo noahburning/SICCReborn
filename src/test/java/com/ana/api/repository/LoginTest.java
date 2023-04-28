@@ -13,7 +13,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Test successful login")
-    public void testSuccessfulLogin() {
+    public void testSuccessfulLoginSQL() {
         String dbUrl = "jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB";
         String username = "admin";
         String password = "Dragonfly-Laurel-Serpent0-Purse-Scapegoat";
@@ -43,7 +43,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Test invalid login")
-    public void testInvalidLogin() {
+    public void testInvalidLoginSQL() {
         String dbUrl = "jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB";
         String username = "admin";
         String password = "Dragonfly-Laurel-Serpent0-Purse-Scapegoat";
