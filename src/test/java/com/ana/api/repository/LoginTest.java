@@ -1,4 +1,5 @@
 package com.ana.api.repository;
+
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -12,6 +13,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Test successful login")
+    
     public void testSuccessfulLogin() {
         String dbUrl = "jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB";
         String username = "admin";
@@ -42,7 +44,9 @@ public class LoginTest {
 
     @Test
     @DisplayName("Test invalid login")
-    public void testInvalidLogin() {
+
+    public void testInvalidLoginSQL() {
+
         String dbUrl = "jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB";
         String username = "admin";
         String password = "Dragonfly-Laurel-Serpent0-Purse-Scapegoat";
@@ -69,4 +73,5 @@ public class LoginTest {
             fail("SQL error occurred: " + e.getMessage());
         }
     }
+
 }
