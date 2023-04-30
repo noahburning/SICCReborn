@@ -18,15 +18,13 @@ public class NewUserTest {
     @DisplayName("Testing successful creation of new User")
     public void testNewUserCreation() {
         // Set up database connection
-        String dbUrl = "jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB";
-        String username = "admin";
-        String password = "Dragonfly-Laurel-Serpent0-Purse-Scapegoat";
+
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         try {
-            conn = DriverManager.getConnection(dbUrl, username, password);
+            conn = DriverManager.getConnection("jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB", "admin", "Dragonfly-Laurel-Serpent0-Purse-Scapegoat");
 
             String fname = "test";
             String minit = "t";
