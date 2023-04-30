@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 public class NewCookieTest {
-
     @Test
     public void testAddNewCookieAndDelete() throws SQLException {
         // create connection to the database

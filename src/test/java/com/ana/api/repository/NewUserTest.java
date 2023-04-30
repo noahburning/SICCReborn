@@ -74,7 +74,6 @@ public class NewUserTest {
             } else {
                 System.out.println("Error: user not added.");
             }
-
             // Delete user that was just added
             pstmt = conn.prepareStatement("DELETE FROM User WHERE id = ?");
             pstmt.setInt(1, new_id);

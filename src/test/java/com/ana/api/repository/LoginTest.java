@@ -6,7 +6,6 @@ import java.sql.*;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 @SpringBootTest(classes=com.ana.api.Application.class)
 public class LoginTest {
 
