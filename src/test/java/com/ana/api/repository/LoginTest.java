@@ -4,12 +4,11 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.fail;
 import java.sql.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest(classes=com.ana.api.Application.class)
-public class loginTest {
+public class LoginTest {
 
     @Test
     @DisplayName("Test successful login")
@@ -17,8 +16,8 @@ public class loginTest {
         String dbUrl = "jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB";
         String username = "admin";
         String password = "Dragonfly-Laurel-Serpent0-Purse-Scapegoat";
-        String enteredUsername = "jsmith";
-        String enteredPassword = "testpass123";
+        String enteredUsername = "admin";
+        String enteredPassword = "siccana2023";
 
         try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
             System.out.println("Connection established!");
