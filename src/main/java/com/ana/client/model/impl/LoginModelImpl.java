@@ -66,15 +66,28 @@ public class LoginModelImpl implements LoginModel {
         logger.debug("Password: {}", password);
         logger.debug("Hashed password: {}", hash_pass(password));
 
-        ResponseEntity<String> response = restTemplate.postForEntity(baseUrl, request, String.class);
-        return (response.getStatusCode() == HttpStatus.OK);
+        ResponseEntity<String> response = null;
+        try  {
+            response = restTemplate.postForEntity(baseUrl, request, String.class);
+            logger.debug("Response: {}", response);
+            return (response.getStatusCode() == HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Error: {}", e.getMessage());
+            return false;
+        } finally {
+            if (response != null) {
+                logger.debug("Response: {}", response);
+            } else {
+                logger.debug("Response: null");
+            }
+        }
     }
 
     private String hash_pass(String password) {
         // Set up hashing parameters
         final int BUF = 16;
-        final int ITERATION_COUNT = 65536;
-        final int KEY_LENGTH = 128;
+        final int ITERATION_COUNT = 15;
+        final int KEY_LENGTH = 256;
         final String ALGORITHM = "PBKDF2WithHmacSHA256";
 
         // Generate salt and hash password

@@ -31,13 +31,21 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
         final String usernameInput = loginView.getUsername().trim();
         final String passwordInput = loginView.getPassword().trim();
 
-        if (!loginModel.validateCredentials(usernameInput, passwordInput)) {
+        boolean validCredentials = loginModel.validateCredentials(usernameInput, passwordInput);
+
+        if (!validCredentials) {
             loginView.showErrorMessage(INVALID_CRED_MSG);
-        } else if (!loginModel.login(usernameInput, passwordInput)) {
-            loginView.showErrorMessage("Login failed!");
-        } else {
-            loginView.showSuccessMessage("Login successful!");
+            return;
         }
+
+        boolean loginSuccessful = loginModel.login(usernameInput, passwordInput);
+
+        if(loginSuccessful) {
+            loginView.showSuccessMessage("Login successful!");
+        } else {
+            loginView.showErrorMessage("Login failed!");
+        }
+
     }
 
 }
