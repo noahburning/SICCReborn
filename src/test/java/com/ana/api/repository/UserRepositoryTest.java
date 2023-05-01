@@ -17,7 +17,8 @@ public class UserRepositoryTest {
     @Test
     public void testFindUserById() throws Exception {
         User user = new User();
-        user.setUsername("cr7");
+        user.setUsername("crtoro13"); // must be unique and longer than 5 characters (6-30)
+        user.setPassword("ValidPassword1");
         user.setFirstName("Cristiano");
         user.setMiddleInitial("R");
         user.setLastName("Ronaldo");
@@ -27,7 +28,7 @@ public class UserRepositoryTest {
         User findUser = userRepository.findById(user.getId()).orElse(null);
 
         assertNotNull(findUser);
-        assertEquals("cr7", findUser.getUsername());
+        assertEquals("crtoro13", findUser.getUsername());
 
         userRepository.delete(user);
     }
@@ -35,17 +36,18 @@ public class UserRepositoryTest {
     @Test
     public void testFindByUsername() throws Exception {
         User user = new User();
-        user.setUsername("cr7");
+        user.setUsername("crtoro13");
+        user.setPassword("ValidPassword1");
         user.setFirstName("Cristiano");
         user.setMiddleInitial("R");
         user.setLastName("Ronaldo");
 
         userRepository.save(user);
 
-        User findUser = userRepository.findByUsername("cr7").orElse(null);
+        User findUser = userRepository.findByUsername("crtoro13").orElse(null);
 
         assertNotNull(findUser);
-        assertEquals("cr7", findUser.getUsername());
+        assertEquals("crtoro13", findUser.getUsername());
 
         userRepository.delete(user);
     }
