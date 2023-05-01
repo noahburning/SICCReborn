@@ -3,6 +3,30 @@ package com.ana.api.entity;
 
 import javax.persistence.*;
 
+/**
+ * <p>This Entity class represents the "User" table in the database.</p>
+ * <table style="border-style:solid">
+ *     <thead>
+ *         <tr>
+ *             <th>id</th>
+ *             <th>fname</th>
+ *             <th>minit</th>
+ *             <th>lname</th>
+ *             <th>username</th>
+ *             <th>password</th>
+ *             <th>is_manager</th>
+ *             <th>manager_id</th>
+ *         </tr>
+ *     </thead>
+ *     <tbody>
+ *         <tr><td>1</td><td>John</td><td>A</td><td>Doe</td><td>jdoe</td><td>password</td><td>false</td><td>2</td></tr>
+ *     </tbody>
+ *     <caption style="padding=2px">User Table Example:</caption>
+ * </table>
+ *
+ * @author Ali Ahmed
+ *
+ */
 @Entity
 @Table(name = "User")
 public class User {
@@ -10,7 +34,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name = "fname")
     private String firstName;
@@ -30,18 +54,18 @@ public class User {
     @Column(name = "is_manager")
     private boolean isManager;
 
-    @Column(name = "manager_id")
-    private long managerId;
+    @Column(name = "mgr_id")
+    private Long managerId;
 
     public User() {
     }
 
-    public User(long id, String username) {
+    public User(Long id, String username) {
         this.id = id;
         this.username = username;
     }
 
-    public User(long id, String firstName, String middleInitial, String lastName, String username, String password, boolean isManager, long managerId) {
+    public User(Long id, String firstName, String middleInitial, String lastName, String username, String password, boolean isManager, Long managerId) {
         this.id = id;
         this.firstName = firstName;
         this.middleInitial = middleInitial;
@@ -52,11 +76,11 @@ public class User {
         this.managerId = managerId;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -108,11 +132,11 @@ public class User {
         this.isManager = manager;
     }
 
-    public long getManagerId() {
+    public Long getManagerId() {
         return managerId;
     }
 
-    public void setManagerId(long managerId) {
+    public void setManagerId(Long managerId) {
         this.managerId = managerId;
     }
 
