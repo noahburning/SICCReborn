@@ -45,7 +45,6 @@ public class ClientFrame extends JFrame {
 
         navigator.addView(ViewType.LOGIN.toString(), (JPanel) loginView);
         navigator.showView(ViewType.LOGIN.toString());
-        navigator.showView(ViewType.LOGIN.toString());
     }
 
     private void init() {

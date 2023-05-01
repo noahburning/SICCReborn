@@ -33,12 +33,10 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
 
         if (!loginModel.validateCredentials(usernameInput, passwordInput)) {
             loginView.showErrorMessage(INVALID_CRED_MSG);
-            loginView.clearInputs();
         } else if (!loginModel.login(usernameInput, passwordInput)) {
             loginView.showErrorMessage("Login failed!");
         } else {
             loginView.showSuccessMessage("Login successful!");
-            loginView.clearInputs();
         }
     }
 
