@@ -29,10 +29,11 @@ public class ClientFrame extends JFrame {
     private static final String BASE_URL = "http://localhost:8080";
     private static final String EXIT_ENDPOINT = BASE_URL + "/exit";
     protected final Navigator navigator;
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     public ClientFrame() {
         this.navigator = new Navigator(this);
+        this.restTemplate = new RestTemplate();
         clientExitHandler();
         init();
         addLoginView();
@@ -40,7 +41,7 @@ public class ClientFrame extends JFrame {
 
     private void addLoginView() {
         LoginView loginView = new LoginViewImpl();
-        LoginModel loginModel = new LoginModelImpl(new RestTemplate(), BASE_URL.concat("/login"));
+        LoginModel loginModel = new LoginModelImpl(restTemplate, BASE_URL.concat("/login"));
         new LoginPresenterImpl(loginModel, loginView);
 
         navigator.addView(ViewType.LOGIN.toString(), (JPanel) loginView);
