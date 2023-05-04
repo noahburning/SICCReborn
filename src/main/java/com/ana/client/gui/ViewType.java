@@ -3,17 +3,14 @@ package com.ana.client.gui;
 /**
  * Defines the different views that can be displayed in the client.
  * String values are used to identify the view in the {@link Navigator}.
- *
+ * <p>
  * {@code @copyright} Copyright (c) 2023
+ *
  * @author Ali Ahmed
  */
 public enum ViewType {
 
-    LOGIN,
-    EMPLOYEE_DASHBOARD,
-    TIME_CARD,
-    SALES_TERMINAL,
-    MANAGER_DASHBOARD;
+    LOGIN, EMPLOYEE_DASHBOARD, TIME_CARD, SALES_TERMINAL, MANAGER_DASHBOARD;
 
     private final String viewName;
 

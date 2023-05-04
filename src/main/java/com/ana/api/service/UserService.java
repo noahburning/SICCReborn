@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -21,6 +22,10 @@ public class UserService {
     @Transactional
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public boolean matchPassword(User user, String password) {
+        return String.valueOf(user.getPassword()).equals(password);
     }
 
 }

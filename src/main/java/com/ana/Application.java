@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 @SpringBootApplication
 @RestController
@@ -19,7 +19,7 @@ public class Application {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hello World!";
+        return "Hello, World!";
     }
 
 }

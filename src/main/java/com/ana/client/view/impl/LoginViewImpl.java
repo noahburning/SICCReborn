@@ -5,7 +5,6 @@ import com.ana.client.view.LoginView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 public class LoginViewImpl extends JPanel implements LoginView {
 
@@ -38,7 +37,14 @@ public class LoginViewImpl extends JPanel implements LoginView {
 
     @Override
     public String getPassword() {
-        return Arrays.toString(passwordField.getPassword());
+        char[] password_array = passwordField.getPassword();
+        StringBuilder password = new StringBuilder();
+
+        for (char c : password_array) {
+            password.append(c);
+        }
+
+        return password.toString();
     }
 
     @Override
@@ -59,12 +65,10 @@ public class LoginViewImpl extends JPanel implements LoginView {
 
     @Override
     public void addLoginListener(LoginListener listener) {
-        loginButton.addActionListener(
-                e -> {
-                    listener.onLogin(getUsername(), getPassword());
-                    clearInputs();
-                }
-        );
+        loginButton.addActionListener(e -> {
+            listener.onLogin(getUsername(), getPassword());
+            clearInputs();
+        });
     }
 
 }

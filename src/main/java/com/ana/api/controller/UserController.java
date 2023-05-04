@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getById(@RequestParam(value="id") Long id) {
+    public ResponseEntity<User> getById(@RequestParam(value = "id") Long id) {
         Optional<User> user = userService.findById(id);
 
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

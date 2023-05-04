@@ -18,4 +18,5 @@ public class ExitController {
     public void exit() {
         ((ConfigurableApplicationContext) applicationContext).close();
     }
+
 }

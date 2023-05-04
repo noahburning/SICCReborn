@@ -9,8 +9,9 @@ import java.util.Map;
  * A class that manages the navigation between views.
  * The views are stored in a {@link Map} and are displayed in a {@link JPanel}.
  * The {@link Navigator} is used to switch between views.
- *
+ * <p>
  * {@code @copyright}  Copyright (c) 2023
+ *
  * @author Ali Ahmed
  */
 public class Navigator {
@@ -33,6 +34,7 @@ public class Navigator {
 
     /**
      * Creates a new {@link Navigator} and adds it to the {@code parentContainer}.
+     *
      * @param parentContainer The {@link Container} that the {@link Navigator} will be added to.
      */
     public Navigator(Container parentContainer) {
@@ -45,8 +47,9 @@ public class Navigator {
 
     /**
      * Adds a view to the {@link Navigator}.
+     *
      * @param viewName The name of the view.
-     * @param view The {@link JPanel} that contains the view.
+     * @param view     The {@link JPanel} that contains the view.
      */
     public void addView(String viewName, JPanel view) {
         views.put(viewName, view);
@@ -55,6 +58,7 @@ public class Navigator {
 
     /**
      * Shows the view with the specified name.
+     *
      * @param viewName The name of the view.
      */
     public void showView(String viewName) {
@@ -63,6 +67,7 @@ public class Navigator {
 
     /**
      * Removes the view with the specified name.
+     *
      * @param viewName The name of the view.
      */
     public void removeView(String viewName) {

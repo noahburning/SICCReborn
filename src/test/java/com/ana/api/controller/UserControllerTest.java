@@ -25,7 +25,8 @@ public class UserControllerTest {
     public void testGetUserByIdMapping() throws Exception
     {
         User user = new User();
-        user.setUsername("cr7");
+        user.setUsername("crtoro13");
+        user.setPassword("ValidPassword1");
         user.setFirstName("Cristiano");
         user.setMiddleInitial("R");
         user.setLastName("Ronaldo");
@@ -45,6 +46,7 @@ public class UserControllerTest {
     {
         User user = new User();
         user.setUsername("cr7");
+        user.setPassword("ValidPassword1");
         user.setFirstName("Cristiano");
         user.setMiddleInitial("R");
         user.setLastName("Ronaldo");
