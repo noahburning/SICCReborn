@@ -28,15 +28,25 @@ public class ClientFrame extends JFrame {
     private static final String WINDOW_TITLE = "Super Innovative Cookie Code";
     private static final String BASE_URL = "http://localhost:8080";
     private static final String EXIT_ENDPOINT = BASE_URL + "/exit";
+
+    private static ClientFrame instance = null;
+
     protected final Navigator navigator;
     private final RestTemplate restTemplate;
 
-    public ClientFrame() {
+    private ClientFrame() {
         this.navigator = new Navigator(this);
         this.restTemplate = new RestTemplate();
         clientExitHandler();
         init();
         addLoginView();
+    }
+
+    public static ClientFrame getInstance() {
+        if (instance == null) {
+            instance = new ClientFrame();
+        }
+        return instance;
     }
 
     private void addLoginView() {
