@@ -1,10 +1,8 @@
 package com.ana.api.repository;
 
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.fail;
 import java.sql.*;
-
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
@@ -12,7 +10,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Test successful login")
-    
+
     public void testSuccessfulLogin() {
         Connection conn = null;
 

@@ -1,6 +1,5 @@
 package com.ana.api.entity;
 
-
 import javax.persistence.*;
 
 /**
