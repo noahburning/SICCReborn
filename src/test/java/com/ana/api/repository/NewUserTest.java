@@ -1,16 +1,11 @@
 package com.ana.api.repository;
-
 import org.junit.jupiter.api.*;
-
 import java.sql.*;
-
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-@SpringBootTest(classes=com.ana.api.Application.class)
+@SpringBootTest
 
 public class NewUserTest {
 
@@ -125,8 +120,8 @@ public class NewUserTest {
             String fname = "admin";
             String minit = "a";
             String lname = "admin";
-            String user = "admin";
-            String pass = "siccana2023";
+            String user = "admin1";
+            String pass = "SiccAna2023";
             boolean is_manager = true;
 
             // Check if username already exists in User table

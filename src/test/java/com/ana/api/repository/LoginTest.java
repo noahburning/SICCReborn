@@ -1,26 +1,25 @@
 package com.ana.api.repository;
 
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.fail;
 import java.sql.*;
-
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes=com.ana.api.Application.class)
+@SpringBootTest
 public class LoginTest {
 
     @Test
     @DisplayName("Test successful login")
-    
-    public void testSuccessfulLogin() {
-        String dbUrl = "jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB";
-        String username = "admin";
-        String password = "Dragonfly-Laurel-Serpent0-Purse-Scapegoat";
-        String enteredUsername = "admin";
-        String enteredPassword = "siccana2023";
 
-        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+    public void testSuccessfulLogin() {
+        Connection conn = null;
+
+        String enteredUsername = "admin1";
+        String enteredPassword = "SiccAna2023";
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB", "admin", "Dragonfly-Laurel-Serpent0-Purse-Scapegoat");
+
             System.out.println("Connection established!");
 
             // Prepare and execute the SQL statement
@@ -46,13 +45,14 @@ public class LoginTest {
 
     public void testInvalidLoginSQL() {
 
-        String dbUrl = "jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB";
-        String username = "admin";
-        String password = "Dragonfly-Laurel-Serpent0-Purse-Scapegoat";
+        Connection conn = null;
+
         String enteredUsername = "testuser";
         String enteredPassword = "wrongpassword";
 
-        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB", "admin", "Dragonfly-Laurel-Serpent0-Purse-Scapegoat");
+
             System.out.println("Connection established!");
 
             // Prepare and execute the SQL statement
