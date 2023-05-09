@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -111,7 +110,11 @@ public class LoginModelImpl implements LoginModel {
         }
 
         // Return hashed password encoded in Base64
-        return Base64.getEncoder().encodeToString(hash);
+        String passwordHashFormat = "$pbkdf2-sha256$%d$%s$%s";
+        String saltString = Base64.getEncoder().encodeToString(salt);
+        String hashString = Base64.getEncoder().encodeToString(hash);
+
+        return String.format(passwordHashFormat, ITERATION_COUNT, saltString, hashString);
     }
 
 }
