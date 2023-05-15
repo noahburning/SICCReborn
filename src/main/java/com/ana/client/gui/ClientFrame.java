@@ -60,12 +60,13 @@ public class ClientFrame extends JFrame {
 
     private void init() {
         super.setTitle(WINDOW_TITLE);
-        super.setResizable(true);
-        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
         super.setMinimumSize(new Dimension(800, 600));
+        super.setResizable(true);
+        super.pack();
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setVisible(true);
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     private void clientExitHandler() {
