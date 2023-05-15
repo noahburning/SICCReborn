@@ -8,24 +8,35 @@ import java.awt.*;
 
 public class LoginViewImpl extends JPanel implements LoginView {
 
-    private final JTextField usernameField;
-    private final JPasswordField passwordField;
-    private final JButton loginButton;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    private JButton loginButton;
+
+    private static final int TEXT_COLUMN_LENGTH = 30;
+    private static final int GRID_ROWS = 2;
+    private static final int GRID_COLUMNS = 2;
+    private static final String LOGIN_LABEL = "Login";
+    private static final String USERNAME_LABEL = "Username:";
+    private static final String PASSWORD_LABEL = "Password:";
 
     public LoginViewImpl() {
-        usernameField = new JTextField(20);
-        passwordField = new JPasswordField(20);
-        loginButton = new JButton("Login");
+        initComponents();
+    }
 
-        JLabel usernameLabel = new JLabel("Username:");
-        JLabel passwordLabel = new JLabel("Password:");
+    private void initComponents() {
+        usernameField = new JTextField(TEXT_COLUMN_LENGTH);
+        passwordField = new JPasswordField(TEXT_COLUMN_LENGTH);
+        loginButton = new JButton(LOGIN_LABEL);
 
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(2, 2));
+        JLabel usernameLabel = new JLabel(USERNAME_LABEL);
+        JLabel passwordLabel = new JLabel(PASSWORD_LABEL);
+
+        JPanel inputPanel = new JPanel(new GridLayout(GRID_ROWS, GRID_COLUMNS));
         inputPanel.add(usernameLabel);
         inputPanel.add(usernameField);
         inputPanel.add(passwordLabel);
         inputPanel.add(passwordField);
+
         add(inputPanel, BorderLayout.CENTER);
         add(loginButton, BorderLayout.SOUTH);
     }

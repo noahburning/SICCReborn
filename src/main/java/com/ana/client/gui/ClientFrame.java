@@ -57,8 +57,12 @@ public class ClientFrame extends JFrame {
         LoginModel loginModel = new LoginModelImpl(restTemplate, BASE_URL.concat("/login"));
         new LoginPresenterImpl(loginModel, loginView, this.navigator);
 
-        navigator.addView(ViewType.LOGIN.toString(), (JPanel) loginView);
-        navigator.showView("LOGIN");
+        JPanel loginWrapper = new JPanel(new GridBagLayout());
+        loginWrapper.add((JPanel) loginView);
+
+        navigator.addView(ViewType.LOGIN.toString(), loginWrapper);
+        navigator.showView(ViewType.LOGIN.toString());
+
     }
 
     private void addEmployeeDashboardView() {
@@ -72,12 +76,13 @@ public class ClientFrame extends JFrame {
 
     private void init() {
         super.setTitle(WINDOW_TITLE);
-        super.setResizable(true);
-        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
         super.setMinimumSize(new Dimension(800, 600));
+        super.setResizable(true);
+        super.pack();
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setVisible(true);
+        super.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     private void clientExitHandler() {
