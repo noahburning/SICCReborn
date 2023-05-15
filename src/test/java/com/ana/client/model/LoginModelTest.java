@@ -1,6 +1,7 @@
 package com.ana.client.model;
 
 import com.ana.client.model.impl.LoginModelImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,13 +15,21 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LoginModelTest {
 
-    private LoginModelImpl loginModel;
+    private static final String BASE_URL = "http://localhost:%d/login";
+
+    private LoginModel loginModel;
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Value("${local.server.port}")
     private int port;
+
+    @BeforeEach
+    public void setup() throws Exception {
+        final String URL = String.format(BASE_URL, port);
+        loginModel = new LoginModelImpl(restTemplate.getRestTemplate(), URL);
+    }
 
     @Test
     public void testValidateCredentialsValid() {
@@ -62,10 +71,7 @@ public class LoginModelTest {
         username = "this_username_is_too_long_to_be_valid";
         password = "ValidPassword1";
 
-        //int usernameLength = username.length();
         validation = loginModel.validateCredentials(username, password);
-        //boolean usernameTooLong = usernameLength > 30;
-        //assertTrue(usernameTooLong);
         assertFalse(validation);
 
         // testing case 3: username contains invalid characters
@@ -107,12 +113,9 @@ public class LoginModelTest {
 
     @Test
     public void testLogin() {
-        // arrange
-        final String BASE_URL_FORMAT = "http://localhost:%d/login";
-        String url = String.format(BASE_URL_FORMAT, port);
-        LoginModelImpl loginModel = new LoginModelImpl(restTemplate.getRestTemplate(), url);
+        // username and password
         String username = "admin1";
-        String password = "siccana2023";
+        String password = "SiccAna2023";
 
         // act
         boolean result = loginModel.login(username, password);
@@ -124,9 +127,6 @@ public class LoginModelTest {
     @Test
     public void testLoginAndValidateCredentials() {
         // set up the test
-        final String BASE_URL_FORMAT = "http://localhost:%d/login";
-        String url = String.format(BASE_URL_FORMAT, port);
-        LoginModelImpl loginModel = new LoginModelImpl(restTemplate.getRestTemplate(), url);
         final String USERNAME = "fjones";
         final String PASSWORD = "ValidPassw0rd";
 
@@ -137,8 +137,7 @@ public class LoginModelTest {
         // assert that the results are true as expected
         assertAll("TestLoginAndValidateCredentials",
                 () -> assertTrue(validation),
-                () -> assertTrue(result)
-        );
+                () -> assertTrue(result));
     }
 
 }
