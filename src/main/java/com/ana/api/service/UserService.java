@@ -24,6 +24,11 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    @Transactional
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
     public boolean matchPassword(User user, String password) {
         return String.valueOf(user.getPassword()).equals(password);
     }
