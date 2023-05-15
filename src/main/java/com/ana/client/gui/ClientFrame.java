@@ -54,7 +54,10 @@ public class ClientFrame extends JFrame {
         LoginModel loginModel = new LoginModelImpl(restTemplate, BASE_URL.concat("/login"));
         new LoginPresenterImpl(loginModel, loginView);
 
-        navigator.addView(ViewType.LOGIN.toString(), (JPanel) loginView);
+        JPanel loginWrapper = new JPanel(new GridBagLayout());
+        loginWrapper.add((JPanel) loginView);
+
+        navigator.addView(ViewType.LOGIN.toString(), loginWrapper);
         navigator.showView(ViewType.LOGIN.toString());
     }
 
