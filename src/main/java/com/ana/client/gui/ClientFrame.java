@@ -2,8 +2,11 @@ package com.ana.client.gui;
 
 import com.ana.client.model.LoginModel;
 import com.ana.client.model.impl.LoginModelImpl;
+import com.ana.client.presenter.impl.EmployeeDashboardPresenterImpl;
 import com.ana.client.presenter.impl.LoginPresenterImpl;
+import com.ana.client.view.EmployeeDashboardView;
 import com.ana.client.view.LoginView;
+import com.ana.client.view.impl.EmployeeDashboardViewImpl;
 import com.ana.client.view.impl.LoginViewImpl;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -52,11 +55,20 @@ public class ClientFrame extends JFrame {
     private void addLoginView() {
         LoginView loginView = new LoginViewImpl();
         LoginModel loginModel = new LoginModelImpl(restTemplate, BASE_URL.concat("/login"));
-        new LoginPresenterImpl(loginModel, loginView);
+        new LoginPresenterImpl(loginModel, loginView, this.navigator);
 
         navigator.addView(ViewType.LOGIN.toString(), (JPanel) loginView);
-        navigator.showView(ViewType.LOGIN.toString());
+        navigator.showView("LOGIN");
     }
+
+    private void addEmployeeDashboardView() {
+        EmployeeDashboardView employeeDashboardView = new EmployeeDashboardViewImpl();
+        new EmployeeDashboardPresenterImpl(employeeDashboardView, this.navigator);
+
+        navigator.addView(ViewType.EMPLOYEE_DASHBOARD.toString(), (JPanel) employeeDashboardView);
+        navigator.showView("EMPLOYEE_DASHBOARD");
+    }
+
 
     private void init() {
         super.setTitle(WINDOW_TITLE);

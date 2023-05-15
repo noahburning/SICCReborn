@@ -4,15 +4,19 @@ import com.ana.client.listener.LoginListener;
 import com.ana.client.model.LoginModel;
 import com.ana.client.presenter.LoginPresenter;
 import com.ana.client.view.LoginView;
+import com.ana.client.gui.Navigator;
+import com.ana.client.gui.ViewType;
 
 public class LoginPresenterImpl implements LoginPresenter, LoginListener {
 
     private final LoginModel loginModel;
     private final LoginView loginView;
+    private final Navigator navigator;
 
-    public LoginPresenterImpl(LoginModel loginModel, LoginView loginView) {
+    public LoginPresenterImpl(LoginModel loginModel, LoginView loginView, Navigator navigator) {
         this.loginModel = loginModel;
         this.loginView = loginView;
+        this.navigator = navigator;
         this.loginView.addLoginListener(this);
     }
 
@@ -42,10 +46,9 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
 
         if(loginSuccessful) {
             loginView.showSuccessMessage("Login successful!");
+            navigator.showView("EMPLOYEE_DASHBOARD");
         } else {
             loginView.showErrorMessage("Login failed!");
         }
-
     }
-
 }
