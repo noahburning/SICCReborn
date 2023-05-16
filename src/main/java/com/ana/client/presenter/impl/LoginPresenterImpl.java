@@ -32,6 +32,9 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
                 Username must be between 6 and 30 characters and contain only letters, numbers, underscores, and hyphens.
                 Password must be between 8 and 30 characters and contain at least one uppercase letter, one lowercase letter, and one digit.""";
 
+        final String LOGIN_SUCCESS_MSG = "Login successful!";
+        final String LOGIN_FAILED_MSG = "Login failed!";
+
         final String usernameInput = loginView.getUsername().trim();
         final String passwordInput = loginView.getPassword().trim();
 
@@ -45,10 +48,10 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
         boolean loginSuccessful = loginModel.login(usernameInput, passwordInput);
 
         if(loginSuccessful) {
-            loginView.showSuccessMessage("Login successful!");
-            navigator.showView("EMPLOYEE_DASHBOARD");
+            loginView.showSuccessMessage(LOGIN_SUCCESS_MSG);
+            navigator.showView(ViewType.EMPLOYEE_DASHBOARD.toString());
         } else {
-            loginView.showErrorMessage("Login failed!");
+            loginView.showErrorMessage(LOGIN_FAILED_MSG);
         }
     }
 }
