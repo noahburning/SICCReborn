@@ -16,9 +16,9 @@ public class ClockController {
     @Autowired
     private ClockService clockService;
 
-    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Clock> getById(@PathVariable("id") Long id) {
-        Optional<Clock> clock = clockService.getById(id);
+    @GetMapping(path = "/{clockId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Clock> getById(@PathVariable("clockId") Long clockId) {
+        Optional<Clock> clock = clockService.getById(clockId);
 
         return clock.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -29,12 +29,12 @@ public class ClockController {
         return ResponseEntity.ok(createdClock);
     }
 
-    @PutMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Clock> updateClock(@PathVariable("id") Long id, @RequestBody Clock clock) {
-        Optional<Clock> existingClock = clockService.getById(id);
+    @PutMapping(path = "/{clockId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Clock> updateClock(@PathVariable("clockId") Long clockId, @RequestBody Clock clock) {
+        Optional<Clock> existingClock = clockService.getById(clockId);
 
         if (existingClock.isPresent()) {
-            clock.setId(id);
+            clock.setClockId(clockId);
             Clock updatedClock = clockService.updateClock(clock);
             return ResponseEntity.ok(updatedClock);
         } else {
@@ -42,9 +42,9 @@ public class ClockController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteClock(@PathVariable("id") Long id) {
-        boolean deleted = clockService.deleteClock(id);
+    @DeleteMapping("/{clockId}")
+    public ResponseEntity<Void> deleteClock(@PathVariable("clockId") Long clockId) {
+        boolean deleted = clockService.deleteClock(clockId);
 
         if (deleted) {
             return ResponseEntity.noContent().build();

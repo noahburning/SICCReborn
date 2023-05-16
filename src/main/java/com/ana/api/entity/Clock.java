@@ -8,8 +8,8 @@ public class Clock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "clock_id", nullable = false)
+    private Long clockId;
 
     @Column(name = "user_id")
     private Long userId;
@@ -26,19 +26,18 @@ public class Clock {
     public Clock() {
     }
 
-    public Clock(Long userId, String clockInTime, String clockOutTime, Double hoursWorked) {
+    public Clock(Long userId, String clockInTime, String clockOutTime) {
         this.userId = userId;
         this.clockInTime = clockInTime;
         this.clockOutTime = clockOutTime;
-        this.hoursWorked = hoursWorked;
     }
 
-    public Long getId() {
-        return id;
+    public Long getClockId() {
+        return clockId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setClockId(Long clockId) {
+        this.clockId = clockId;
     }
 
     public Long getUserId() {
@@ -76,7 +75,7 @@ public class Clock {
     @Override
     public String toString() {
         return "Clock {" +
-                "id=" + id +
+                "clockId=" + clockId +
                 ", userId=" + userId +
                 ", clockInTime='" + clockInTime + '\'' +
                 ", clockOutTime='" + clockOutTime + '\'' +
