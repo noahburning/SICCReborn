@@ -43,6 +43,7 @@ public class ClientFrame extends JFrame {
         clientExitHandler();
         init();
         addLoginView();
+        addEmployeeDashboardView();
     }
 
     public static ClientFrame getInstance() {
@@ -62,15 +63,16 @@ public class ClientFrame extends JFrame {
 
         navigator.addView(ViewType.LOGIN.toString(), loginWrapper);
         navigator.showView(ViewType.LOGIN.toString());
-
     }
 
     private void addEmployeeDashboardView() {
         EmployeeDashboardView employeeDashboardView = new EmployeeDashboardViewImpl();
         new EmployeeDashboardPresenterImpl(employeeDashboardView, this.navigator);
 
-        navigator.addView(ViewType.EMPLOYEE_DASHBOARD.toString(), (JPanel) employeeDashboardView);
-        navigator.showView("EMPLOYEE_DASHBOARD");
+        JPanel wrapper = new JPanel(new GridBagLayout());
+        wrapper.add((JPanel) employeeDashboardView);
+
+        navigator.addView(ViewType.EMPLOYEE_DASHBOARD.toString(), wrapper);
     }
 
 
