@@ -29,6 +29,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
     public void login() {
         final String INVALID_CRED_MSG = """
                 Invalid credentials!
+                If you have forgotten your credentials, please contact your system administrator.
                 Username must be between 6 and 30 characters and contain only letters, numbers, underscores, and hyphens.
                 Password must be between 8 and 30 characters and contain at least one uppercase letter, one lowercase letter, and one digit.""";
 
