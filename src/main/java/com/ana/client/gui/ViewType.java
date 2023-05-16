@@ -10,7 +10,7 @@ package com.ana.client.gui;
  */
 public enum ViewType {
 
-    LOGIN, EMPLOYEE_DASHBOARD, TIME_CARD, SALES_TERMINAL, MANAGER_DASHBOARD;
+    LOGIN, EMPLOYEE_DASHBOARD, TIME_CARD, SALES_TERMINAL, MANAGER_DASHBOARD, CLOCK;
 
     private final String viewName;
 
@@ -23,6 +23,7 @@ public enum ViewType {
             case "TIME_CARD" -> viewName1 = "time card";
             case "SALES_TERMINAL" -> viewName1 = "sales terminal";
             case "MANAGER_DASHBOARD" -> viewName1 = "manager dashboard";
+            case "CLOCK" -> viewName1 = "clock"; // Added this line
         }
 
         this.viewName = viewName1;
@@ -32,5 +33,5 @@ public enum ViewType {
     public String toString() {
         return viewName;
     }
-
 }
+

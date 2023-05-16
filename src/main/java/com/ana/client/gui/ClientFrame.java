@@ -2,10 +2,13 @@ package com.ana.client.gui;
 
 import com.ana.client.model.LoginModel;
 import com.ana.client.model.impl.LoginModelImpl;
+import com.ana.client.presenter.impl.ClockInPresenterImpl;
 import com.ana.client.presenter.impl.EmployeeDashboardPresenterImpl;
 import com.ana.client.presenter.impl.LoginPresenterImpl;
+import com.ana.client.view.ClockInView;
 import com.ana.client.view.EmployeeDashboardView;
 import com.ana.client.view.LoginView;
+import com.ana.client.view.impl.ClockInViewImpl;
 import com.ana.client.view.impl.EmployeeDashboardViewImpl;
 import com.ana.client.view.impl.LoginViewImpl;
 import org.springframework.http.HttpEntity;
@@ -44,6 +47,7 @@ public class ClientFrame extends JFrame {
         init();
         addLoginView();
         addEmployeeDashboardView();
+        addClockInView();
     }
 
     public static ClientFrame getInstance() {
@@ -73,6 +77,16 @@ public class ClientFrame extends JFrame {
         wrapper.add((JPanel) employeeDashboardView);
 
         navigator.addView(ViewType.EMPLOYEE_DASHBOARD.toString(), wrapper);
+    }
+
+    private void addClockInView() {
+        ClockInView clockInView = new ClockInViewImpl();
+        new ClockInPresenterImpl(clockInView, this.navigator);
+
+        JPanel wrapper = new JPanel(new GridBagLayout());
+        wrapper.add((JPanel) clockInView);
+
+        navigator.addView(ViewType.CLOCK.toString(), wrapper);
     }
 
 
