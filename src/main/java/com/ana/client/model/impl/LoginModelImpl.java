@@ -60,24 +60,24 @@ public class LoginModelImpl implements LoginModel {
     public boolean login(String username, String password) {
         LoginRequest request = new LoginRequest(username, password);
 
-        logger.debug("Sending login request to {}", baseUrl);
-        logger.debug("Username: {}", username);
-        logger.debug("Password: {}", password);
-        logger.debug("Hashed password: {}", hash_pass(password));
+        logger.info("Sending login request to {}", baseUrl);
+        logger.info("Username: {}", username);
+        logger.info("Password: {}", password);
+        logger.info("Hashed password: {}", hash_pass(password));
 
         ResponseEntity<String> response = null;
         try  {
             response = restTemplate.postForEntity(baseUrl, request, String.class);
-            logger.debug("Response: {}", response);
+            logger.info("Response: {}", response);
             return (response.getStatusCode() == HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error: {}", e.getMessage());
             return false;
         } finally {
             if (response != null) {
-                logger.debug("Response: {}", response);
+                logger.info("Response: {}", response);
             } else {
-                logger.debug("Response: null");
+                logger.info("Response: null");
             }
         }
     }
