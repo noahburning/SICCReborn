@@ -35,6 +35,7 @@ import java.awt.event.WindowEvent;
  *
  * @author Ali Ahmed
  */
+
 public class ClientFrame extends JFrame {
 
     private static final String WINDOW_TITLE = "Super Innovative Cookie Code";
@@ -49,6 +50,8 @@ public class ClientFrame extends JFrame {
     private ClientFrame() {
         this.navigator = new Navigator(this);
         this.restTemplate = new RestTemplate();
+        this.userService = userService;
+        this.clockService = clockService;
         clientExitHandler();
         init();
         addLoginView();

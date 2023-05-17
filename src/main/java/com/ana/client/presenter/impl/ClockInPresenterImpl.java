@@ -24,7 +24,7 @@ public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, 
 
     private final ClockInView clockInView;
     private final Navigator navigator;
-    private final UserService userService;
+    private UserService userService;
     private final ClockService clockService;
     public UserContext userContext;
 
