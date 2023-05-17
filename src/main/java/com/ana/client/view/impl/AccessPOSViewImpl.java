@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class AccessPOSViewImpl extends JPanel implements AccessPOSView {
 
-    private JButton returnButton;
+    private final JButton returnButton;
     private ReturnListener returnListener;
 
     public AccessPOSViewImpl() {
@@ -32,10 +32,12 @@ public class AccessPOSViewImpl extends JPanel implements AccessPOSView {
                 returnListener.onReturn();
             }
         });
+
     }
 
     @Override
     public void setReturnListener(ReturnListener listener) {
         this.returnListener = listener;
     }
+
 }

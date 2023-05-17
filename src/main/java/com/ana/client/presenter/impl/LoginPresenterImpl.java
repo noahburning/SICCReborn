@@ -1,12 +1,12 @@
 package com.ana.client.presenter.impl;
 
+import com.ana.client.gui.Navigator;
+import com.ana.client.gui.ViewType;
 import com.ana.client.listener.LoginListener;
 import com.ana.client.model.LoginModel;
 import com.ana.client.presenter.LoginPresenter;
-import com.ana.client.view.LoginView;
-import com.ana.client.gui.Navigator;
-import com.ana.client.gui.ViewType;
 import com.ana.client.utility.UserContext;
+import com.ana.client.view.LoginView;
 
 public class LoginPresenterImpl implements LoginPresenter, LoginListener {
 
@@ -50,11 +50,12 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
 
         boolean loginSuccessful = loginModel.login(usernameInput, passwordInput);
 
-        if(loginSuccessful) {
+        if (loginSuccessful) {
             loginView.showSuccessMessage(LOGIN_SUCCESS_MSG);
             navigator.showView(ViewType.EMPLOYEE_DASHBOARD.toString());
         } else {
             loginView.showErrorMessage(LOGIN_FAILED_MSG);
         }
     }
+
 }

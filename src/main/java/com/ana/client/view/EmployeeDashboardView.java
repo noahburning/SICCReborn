@@ -8,4 +8,5 @@ public interface EmployeeDashboardView {
     void setLogoutListener(LogoutListener listener);
     void setClockInListener(ClockInListener listener);
     void setAccessPOSListener(AccessPOSListener listener);
+
 }

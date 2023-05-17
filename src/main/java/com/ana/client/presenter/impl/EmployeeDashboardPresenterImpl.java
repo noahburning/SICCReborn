@@ -1,12 +1,12 @@
 package com.ana.client.presenter.impl;
 
+import com.ana.client.gui.Navigator;
+import com.ana.client.gui.ViewType;
 import com.ana.client.listener.AccessPOSListener;
+import com.ana.client.listener.ClockInListener;
 import com.ana.client.listener.LogoutListener;
 import com.ana.client.presenter.EmployeeDashboardPresenter;
 import com.ana.client.view.EmployeeDashboardView;
-import com.ana.client.gui.Navigator;
-import com.ana.client.gui.ViewType;
-import com.ana.client.listener.ClockInListener;
 
 public class EmployeeDashboardPresenterImpl implements EmployeeDashboardPresenter, LogoutListener, ClockInListener, AccessPOSListener {
 
@@ -42,5 +42,8 @@ public class EmployeeDashboardPresenterImpl implements EmployeeDashboardPresente
     }
 
     @Override
-    public void onAccessPOS() { navigator.showView(ViewType.SALES_TERMINAL.toString());}
+    public void onAccessPOS() {
+        navigator.showView(ViewType.SALES_TERMINAL.toString());
+    }
+
 }
