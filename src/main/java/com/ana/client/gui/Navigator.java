@@ -1,5 +1,7 @@
 package com.ana.client.gui;
 
+import org.springframework.stereotype.Component;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
@@ -14,6 +16,8 @@ import java.util.Map;
  *
  * @author Ali Ahmed
  */
+
+@Component
 public class Navigator {
 
     /**

@@ -6,12 +6,14 @@ import com.ana.client.presenter.LoginPresenter;
 import com.ana.client.view.LoginView;
 import com.ana.client.gui.Navigator;
 import com.ana.client.gui.ViewType;
+import com.ana.client.utility.UserContext;
 
 public class LoginPresenterImpl implements LoginPresenter, LoginListener {
 
     private final LoginModel loginModel;
     private final LoginView loginView;
     private final Navigator navigator;
+    public UserContext userContext;
 
     public LoginPresenterImpl(LoginModel loginModel, LoginView loginView, Navigator navigator) {
         this.loginModel = loginModel;
@@ -29,6 +31,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginListener {
     public void login() {
         final String INVALID_CRED_MSG = """
                 Invalid credentials!
+                If you have forgotten your credentials, please contact your system administrator.
                 Username must be between 6 and 30 characters and contain only letters, numbers, underscores, and hyphens.
                 Password must be between 8 and 30 characters and contain at least one uppercase letter, one lowercase letter, and one digit.""";
 

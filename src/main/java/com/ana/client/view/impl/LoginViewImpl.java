@@ -1,13 +1,17 @@
 package com.ana.client.view.impl;
 
+import com.ana.api.entity.User;
 import com.ana.client.listener.LoginListener;
 import com.ana.client.view.LoginView;
+
+import com.ana.client.utility.UserContext;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class LoginViewImpl extends JPanel implements LoginView {
 
+    public UserContext userContext;
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
@@ -43,7 +47,11 @@ public class LoginViewImpl extends JPanel implements LoginView {
 
     @Override
     public String getUsername() {
-        return usernameField.getText();
+        String localUser = usernameField.getText();
+        //locally saves the username for other purposes within the code
+        userContext.setUsername(localUser);
+
+        return localUser;
     }
 
     @Override
