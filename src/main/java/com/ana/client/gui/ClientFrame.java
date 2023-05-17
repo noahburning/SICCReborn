@@ -2,7 +2,9 @@ package com.ana.client.gui;
 
 import com.ana.api.service.ClockService;
 import com.ana.api.service.UserService;
+import com.ana.client.model.ClockModel;
 import com.ana.client.model.LoginModel;
+import com.ana.client.model.impl.ClockModelImpl;
 import com.ana.client.model.impl.LoginModelImpl;
 import com.ana.client.presenter.impl.AccessPOSPresenterImpl;
 import com.ana.client.presenter.impl.ClockInPresenterImpl;
@@ -97,14 +99,17 @@ public class ClientFrame extends JFrame {
 
     private void addClockInView() {
         ClockInView clockInView = new ClockInViewImpl();
-        new ClockInPresenterImpl(clockInView, navigator, userService, clockService);
+        ClockModel clockModel = new ClockModelImpl(restTemplate, BASE_URL);
 
+        new ClockInPresenterImpl(clockInView, navigator, clockModel);
 
         JPanel wrapper = new JPanel(new GridBagLayout());
         wrapper.add((JPanel) clockInView);
 
         navigator.addView(ViewType.CLOCK.toString(), wrapper);
     }
+
+
 
     private void addPOSView() {
         AccessPOSView accessPOSView = new AccessPOSViewImpl();
