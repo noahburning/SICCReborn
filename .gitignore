@@ -19,3 +19,7 @@ build
 # Intellij
 .idea
 .idea/*
+
+# Build Artifacts
+out/
+out/*
