@@ -38,4 +38,5 @@ public class EmployeeDashboardPresenterImpl implements EmployeeDashboardPresente
     public void onClockOut() {
         // Perform clock-out functionality
     }
+
 }
