@@ -10,15 +10,13 @@ import com.ana.client.view.EmployeeDashboardView;
 
 public class EmployeeDashboardPresenterImpl implements EmployeeDashboardPresenter, LogoutListener, ClockInListener, AccessPOSListener {
 
-    private final EmployeeDashboardView employeeDashboardView;
     private final Navigator navigator;
 
     public EmployeeDashboardPresenterImpl(EmployeeDashboardView employeeDashboardView, Navigator navigator) {
-        this.employeeDashboardView = employeeDashboardView;
         this.navigator = navigator;
-        this.employeeDashboardView.setLogoutListener(this);
-        this.employeeDashboardView.setClockInListener(this);
-        this.employeeDashboardView.setAccessPOSListener(this);
+        employeeDashboardView.setLogoutListener(this);
+        employeeDashboardView.setClockInListener(this);
+        employeeDashboardView.setAccessPOSListener(this);
     }
 
     @Override
