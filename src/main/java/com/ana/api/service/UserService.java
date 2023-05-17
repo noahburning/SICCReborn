@@ -29,6 +29,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @Transactional
+    public Long getUserIdByUsername(String username) {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get().getId();
+        } else {
+            return null;
+        }
+    }
+
     public boolean matchPassword(User user, String password) {
         return String.valueOf(user.getPassword()).equals(password);
     }

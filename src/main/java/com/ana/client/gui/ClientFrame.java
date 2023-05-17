@@ -4,12 +4,15 @@ import com.ana.api.service.ClockService;
 import com.ana.api.service.UserService;
 import com.ana.client.model.LoginModel;
 import com.ana.client.model.impl.LoginModelImpl;
+import com.ana.client.presenter.impl.AccessPOSPresenterImpl;
 import com.ana.client.presenter.impl.ClockInPresenterImpl;
 import com.ana.client.presenter.impl.EmployeeDashboardPresenterImpl;
 import com.ana.client.presenter.impl.LoginPresenterImpl;
+import com.ana.client.view.AccessPOSView;
 import com.ana.client.view.ClockInView;
 import com.ana.client.view.EmployeeDashboardView;
 import com.ana.client.view.LoginView;
+import com.ana.client.view.impl.AccessPOSViewImpl;
 import com.ana.client.view.impl.ClockInViewImpl;
 import com.ana.client.view.impl.EmployeeDashboardViewImpl;
 import com.ana.client.view.impl.LoginViewImpl;
@@ -51,6 +54,7 @@ public class ClientFrame extends JFrame {
         addLoginView();
         addEmployeeDashboardView();
         addClockInView();
+        addPOSView();
     }
 
     public static ClientFrame getInstance() {
@@ -98,6 +102,17 @@ public class ClientFrame extends JFrame {
 
         navigator.addView(ViewType.CLOCK.toString(), wrapper);
     }
+
+    private void addPOSView() {
+        AccessPOSView accessPOSView = new AccessPOSViewImpl();
+        new AccessPOSPresenterImpl(accessPOSView, navigator);
+
+        JPanel wrapper = new JPanel(new GridBagLayout());
+        wrapper.add((JPanel) accessPOSView);
+
+        navigator.addView(ViewType.SALES_TERMINAL.toString(), wrapper);
+    }
+
 
 
     private void init() {

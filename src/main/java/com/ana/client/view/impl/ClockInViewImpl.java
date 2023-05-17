@@ -3,10 +3,12 @@ package com.ana.client.view.impl;
 import com.ana.client.listener.ClockInListener;
 import com.ana.client.listener.ReturnListener;
 import com.ana.client.view.ClockInView;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
 
+@Component
 public class ClockInViewImpl extends JPanel implements ClockInView {
 
     private JButton clockInButton;

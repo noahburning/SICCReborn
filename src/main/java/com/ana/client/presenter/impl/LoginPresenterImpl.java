@@ -6,12 +6,14 @@ import com.ana.client.presenter.LoginPresenter;
 import com.ana.client.view.LoginView;
 import com.ana.client.gui.Navigator;
 import com.ana.client.gui.ViewType;
+import com.ana.client.utility.UserContext;
 
 public class LoginPresenterImpl implements LoginPresenter, LoginListener {
 
     private final LoginModel loginModel;
     private final LoginView loginView;
     private final Navigator navigator;
+    public UserContext userContext;
 
     public LoginPresenterImpl(LoginModel loginModel, LoginView loginView, Navigator navigator) {
         this.loginModel = loginModel;

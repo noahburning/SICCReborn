@@ -1,5 +1,6 @@
 package com.ana.client.view.impl;
 
+import com.ana.client.listener.AccessPOSListener;
 import com.ana.client.listener.LogoutListener;
 import com.ana.client.listener.ClockInListener;
 import com.ana.client.view.EmployeeDashboardView;
@@ -15,6 +16,7 @@ public class EmployeeDashboardViewImpl extends JPanel implements EmployeeDashboa
     private final JButton accessPOSButton;
     private LogoutListener logoutListener;
     private ClockInListener clockInListener;
+    private AccessPOSListener accessPOSListener;
 
     public EmployeeDashboardViewImpl() {
         logoutButton = new JButton("Logout");
@@ -51,6 +53,14 @@ public class EmployeeDashboardViewImpl extends JPanel implements EmployeeDashboa
                 clockInListener.onClockInOut();
             }
         });
+
+        accessPOSButton.addActionListener(e -> {
+            if (accessPOSListener != null) {
+                accessPOSListener.onAccessPOS();
+            }
+        });
+
+
     }
 
     @Override
@@ -61,5 +71,10 @@ public class EmployeeDashboardViewImpl extends JPanel implements EmployeeDashboa
     @Override
     public void setClockInListener(ClockInListener listener) {
         this.clockInListener = listener;
+    }
+
+    @Override
+    public void setAccessPOSListener(AccessPOSListener listener) {
+        this.accessPOSListener = listener;
     }
 }

@@ -10,19 +10,26 @@ import com.ana.client.listener.ClockInListener;
 import com.ana.client.listener.ReturnListener;
 import com.ana.client.presenter.ClockInPresenter;
 import com.ana.client.view.ClockInView;
+import com.ana.client.utility.UserContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.management.Query;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+@Component
 public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, ReturnListener {
 
     private final ClockInView clockInView;
     private final Navigator navigator;
     private final UserService userService;
     private final ClockService clockService;
+    public UserContext userContext;
 
 
+    String localUser = UserContext.getUsername();
 
     public ClockInPresenterImpl(ClockInView clockInView, Navigator navigator, UserService userService, ClockService clockService) {
         this.clockInView = clockInView;
@@ -33,20 +40,19 @@ public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, 
         this.clockInView.setReturnListener(this);
     }
 
-
+    @Autowired
     @Override
     public void clockIn() {
         // Get the current user ID
-        Optional<User> currentUser = userService.getByUsername("currentUsername"); // Replace "currentUsername" with the actual username of the logged-in user
-        if (currentUser.isPresent()) {
-            Long userId = currentUser.get().getId();
+        Long currentUserId = userService.getUserIdByUsername(localUser);
+        if (currentUserId != null) {
 
             // Get the current date and time
             LocalDateTime now = getCurrentDateTime();
             String clockInTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
             // Create a new Clock entry
-            Clock clock = new Clock(userId, clockInTime, null);
+            Clock clock = new Clock(currentUserId, clockInTime, null);
             Clock createdClock = clockService.createClock(clock);
 
             // Show success message
@@ -55,11 +61,11 @@ public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, 
             // User not found, handle the error
         }
     }
-
+    @Autowired
     @Override
     public void clockOut() {
         // Get the current user ID
-        Optional<User> currentUser = userService.getByUsername("currentUsername"); // Replace "currentUsername" with the actual username of the logged-in user
+        Optional<User> currentUser = userService.getByUsername(localUser); // Replace "currentUsername" with the actual username of the logged-in user
         if (currentUser.isPresent()) {
             Long userId = currentUser.get().getId();
 
