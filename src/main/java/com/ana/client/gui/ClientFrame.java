@@ -1,5 +1,7 @@
 package com.ana.client.gui;
 
+import com.ana.api.service.ClockService;
+import com.ana.api.service.UserService;
 import com.ana.client.model.LoginModel;
 import com.ana.client.model.impl.LoginModelImpl;
 import com.ana.client.presenter.impl.ClockInPresenterImpl;
@@ -11,6 +13,7 @@ import com.ana.client.view.LoginView;
 import com.ana.client.view.impl.ClockInViewImpl;
 import com.ana.client.view.impl.EmployeeDashboardViewImpl;
 import com.ana.client.view.impl.LoginViewImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -79,9 +82,16 @@ public class ClientFrame extends JFrame {
         navigator.addView(ViewType.EMPLOYEE_DASHBOARD.toString(), wrapper);
     }
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ClockService clockService;
+
     private void addClockInView() {
         ClockInView clockInView = new ClockInViewImpl();
-        new ClockInPresenterImpl(clockInView, this.navigator);
+        new ClockInPresenterImpl(clockInView, navigator, userService, clockService);
+
 
         JPanel wrapper = new JPanel(new GridBagLayout());
         wrapper.add((JPanel) clockInView);
