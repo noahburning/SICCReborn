@@ -10,8 +10,6 @@ public interface LoginView {
 
     void showErrorMessage(String message);
 
-    void showSuccessMessage(String message);
-
     void clearInputs();
 
     void addLoginListener(LoginListener listener);

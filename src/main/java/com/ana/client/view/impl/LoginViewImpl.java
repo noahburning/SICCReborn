@@ -11,7 +11,6 @@ import java.awt.*;
 
 public class LoginViewImpl extends JPanel implements LoginView {
 
-    public UserContext userContext;
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
@@ -48,8 +47,9 @@ public class LoginViewImpl extends JPanel implements LoginView {
     @Override
     public String getUsername() {
         String localUser = usernameField.getText();
+
         //locally saves the username for other purposes within the code
-        userContext.setUsername(localUser);
+        UserContext.setUsername(localUser);
 
         return localUser;
     }
@@ -69,11 +69,6 @@ public class LoginViewImpl extends JPanel implements LoginView {
     @Override
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    @Override
-    public void showSuccessMessage(String message) {
-        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override

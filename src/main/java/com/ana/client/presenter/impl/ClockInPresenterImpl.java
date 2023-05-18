@@ -20,8 +20,11 @@ public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, 
 
     private final ClockInView clockInView;
     private final Navigator navigator;
+
     @Autowired
+
     private final ClockModel clockModel;
+
     public UserContext userContext;
 
     public String localUser;
@@ -123,4 +126,5 @@ public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, 
     private LocalDateTime getCurrentDateTime() {
         return LocalDateTime.now();
     }
+
 }

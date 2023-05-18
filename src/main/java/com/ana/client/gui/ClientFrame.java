@@ -6,20 +6,13 @@ import com.ana.api.repository.ClockRepository;
 import com.ana.api.service.UserService;
 import com.ana.client.model.ClockModel;
 import com.ana.client.model.LoginModel;
+import com.ana.client.model.ManagerDashboardModel;
 import com.ana.client.model.impl.ClockModelImpl;
 import com.ana.client.model.impl.LoginModelImpl;
-import com.ana.client.presenter.impl.AccessPOSPresenterImpl;
-import com.ana.client.presenter.impl.ClockInPresenterImpl;
-import com.ana.client.presenter.impl.EmployeeDashboardPresenterImpl;
-import com.ana.client.presenter.impl.LoginPresenterImpl;
-import com.ana.client.view.AccessPOSView;
-import com.ana.client.view.ClockInView;
-import com.ana.client.view.EmployeeDashboardView;
-import com.ana.client.view.LoginView;
-import com.ana.client.view.impl.AccessPOSViewImpl;
-import com.ana.client.view.impl.ClockInViewImpl;
-import com.ana.client.view.impl.EmployeeDashboardViewImpl;
-import com.ana.client.view.impl.LoginViewImpl;
+import com.ana.client.model.impl.ManagerDashboardModelImpl;
+import com.ana.client.presenter.impl.*;
+import com.ana.client.view.*;
+import com.ana.client.view.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -56,15 +49,20 @@ public class ClientFrame extends JFrame {
     private final RestTemplate restTemplate;
     public UserContext userContext;
 
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ClockService clockService;
+
     private ClientFrame() {
         this.navigator = new Navigator(this);
         this.restTemplate = new RestTemplate();
-        this.userService = userService;
-        this.clockService = clockService;
+
         clientExitHandler();
         init();
         addLoginView();
         addEmployeeDashboardView();
+        addManagerDashboardView();
         addClockInView();
         addPOSView();
     }
@@ -92,17 +90,22 @@ public class ClientFrame extends JFrame {
         EmployeeDashboardView employeeDashboardView = new EmployeeDashboardViewImpl();
         new EmployeeDashboardPresenterImpl(employeeDashboardView, this.navigator);
 
-        JPanel wrapper = new JPanel(new GridBagLayout());
-        wrapper.add((JPanel) employeeDashboardView);
+        JPanel employeeDashboardWrapper = new JPanel(new GridBagLayout());
+        employeeDashboardWrapper.add((JPanel) employeeDashboardView);
 
-        navigator.addView(ViewType.EMPLOYEE_DASHBOARD.toString(), wrapper);
+        navigator.addView(ViewType.EMPLOYEE_DASHBOARD.toString(), employeeDashboardWrapper);
     }
 
-    @Autowired
-    private UserService userService;
+    private void addManagerDashboardView() {
+        ManagerDashboardView managerDashboardView = new ManagerDashboardViewImpl();
+        ManagerDashboardModel managerDashboardModel = new ManagerDashboardModelImpl(restTemplate);
+        new ManagerDashboardPresenterImpl(managerDashboardModel, managerDashboardView, navigator);
 
-    @Autowired
-    private ClockService clockService;
+        JPanel managerDashboardWrapper = new JPanel(new GridBagLayout());
+        managerDashboardWrapper.add((JPanel) managerDashboardView);
+
+        navigator.addView(ViewType.MANAGER_DASHBOARD.toString(), managerDashboardWrapper);
+    }
 
     @Autowired
     private ClockRepository clockRepository;
@@ -133,7 +136,6 @@ public class ClientFrame extends JFrame {
 
         navigator.addView(ViewType.SALES_TERMINAL.toString(), wrapper);
     }
-
 
 
     private void init() {
