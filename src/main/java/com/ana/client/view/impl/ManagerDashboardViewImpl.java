@@ -14,35 +14,28 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
 
     private static final Logger logger = LoggerFactory.getLogger(ManagerDashboardViewImpl.class);
 
-    private static final String FIRST_NAME_LABEL_TEXT = "First Name: [Placeholder]";
-    private static final String MIDDLE_INITIAL_LABEL_TEXT = "Middle Initial: [Placeholder]";
-    private static final String LAST_NAME_LABEL_TEXT = "Last Name: [Placeholder]";
-    private static final String USERNAME_LABEL_TEXT = "Username: [Placeholder]";
-    private static final String IS_MANAGER_LABEL_TEXT = "Manager: [Placeholder]";
-    private static final String HOURS_WORKED_LABEL_TEXT = "Hours Worked: [Placeholder]";
+    private static final String FIRST_NAME_LABEL_TEXT = "First Name:";
+    private static final String MIDDLE_INITIAL_LABEL_TEXT = "Middle Initial:";
+    private static final String LAST_NAME_LABEL_TEXT = "Last Name:";
+    private static final String USERNAME_LABEL_TEXT = "Username:";
+    private static final String IS_MANAGER_LABEL_TEXT = "Is Manager:";
+    private static final String HOURS_WORKED_LABEL_TEXT = "Hours Worked:";
     private static final String EMPLOYEE_ID_LABEL_TEXT = "Enter Employee ID:";
-    private static final String EDIT_BUTTON_TEXT = "Edit";
     private static final String LOGOUT_BUTTON_TEXT = "Logout";
     private static final String DASHBOARD_LABEL_TEXT = "Manage Employee by ID";
-    private static final String EMPLOYEE_NAME_LABEL_TEXT = "Employee: [Placeholder]";
+    private static final String EMPLOYEE_NAME_LABEL_TEXT = "Employee:";
     private static final String SEARCH_BUTTON_TEXT = "Lookup";
     private static final String EMPLOYEE_NOT_FOUND_LABEL_TEXT = "Employee Not Found!";
 
     private JButton logoutButton;
-    private JButton editButton1;
-    private JButton editButton2;
     private JLabel dashboardLabel;
     private JLabel employeeNameLabel;
     private JLabel employeeFNameLabel;
     private JLabel employeeMInitLabel;
     private JLabel employeeLNameLabel;
-    private JButton editButton3;
     private JLabel usernameLabel;
     private JLabel isManagerLabel;
     private JLabel hoursWorkedLabel;
-    private JButton editButton4;
-    private JButton editButton5;
-    private JButton editButton6;
     private JLabel employeeIDLabel;
     private JTextField employeeIDTextField;
     private JButton searchButton;
@@ -63,12 +56,6 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
     private void initComponents() {
         // JButtons
         logoutButton = new JButton(LOGOUT_BUTTON_TEXT);
-        editButton1 = new JButton(EDIT_BUTTON_TEXT);
-        editButton2 = new JButton(EDIT_BUTTON_TEXT);
-        editButton3 = new JButton(EDIT_BUTTON_TEXT);
-        editButton4 = new JButton(EDIT_BUTTON_TEXT);
-        editButton5 = new JButton(EDIT_BUTTON_TEXT);
-        editButton6 = new JButton(EDIT_BUTTON_TEXT);
         searchButton = new JButton(SEARCH_BUTTON_TEXT);
 
         // JLabels
@@ -86,25 +73,18 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
 
         // JTextFields
         employeeIDTextField = new JTextField(10);
-
     }
 
     private void addComponents() {
         add(logoutButton);
-        add(editButton1);
-        add(editButton2);
         add(dashboardLabel);
         add(employeeNameLabel);
         add(employeeFNameLabel);
         add(employeeMInitLabel);
         add(employeeLNameLabel);
-        add(editButton3);
         add(usernameLabel);
         add(isManagerLabel);
         add(hoursWorkedLabel);
-        add(editButton4);
-        add(editButton5);
-        add(editButton6);
         add(employeeIDLabel);
         add(employeeIDTextField);
         add(searchButton);
@@ -113,20 +93,14 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
 
     private void setBounds() {
         logoutButton.setBounds(50, 25, 110, 20);
-        editButton1.setBounds(250, 135, 100, 20);
-        editButton2.setBounds(250, 105, 100, 20);
         dashboardLabel.setBounds(300, 40, 150, 25);
         employeeNameLabel.setBounds(150, 70, 160, 25);
         employeeFNameLabel.setBounds(50, 105, 155, 25);
         employeeMInitLabel.setBounds(50, 135, 170, 25);
         employeeLNameLabel.setBounds(50, 165, 155, 25);
-        editButton3.setBounds(250, 165, 100, 20);
         usernameLabel.setBounds(50, 215, 150, 25);
         isManagerLabel.setBounds(50, 245, 145, 25);
         hoursWorkedLabel.setBounds(50, 275, 210, 25);
-        editButton4.setBounds(315, 215, 100, 20);
-        editButton5.setBounds(315, 245, 100, 20);
-        editButton6.setBounds(315, 275, 100, 20);
         employeeIDLabel.setBounds(50, 350, 125, 25);
         employeeIDTextField.setBounds(175, 350, 130, 25);
         searchButton.setBounds(315, 350, 100, 25);
@@ -158,13 +132,21 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
         String username = EmployeeContext.getUsername();
         boolean isManager = EmployeeContext.getIsManager();
 
-        employeeNameLabel.setText("Employee: " + firstName + " " + middleInitial + " " + lastName);
-        employeeFNameLabel.setText("First Name: " + firstName);
-        employeeMInitLabel.setText("Middle Initial: " + middleInitial);
-        employeeLNameLabel.setText("Last Name: " + lastName);
-        usernameLabel.setText("Username: " + username);
-        isManagerLabel.setText("Is Manager: " + isManager);
-        hoursWorkedLabel.setText("Hours Worked: " + 0);
+        final String nameLabel = String.format("%s %s %s %s", EMPLOYEE_NAME_LABEL_TEXT, firstName, middleInitial, lastName);
+        final String managerLabel = String.format("%s %s", IS_MANAGER_LABEL_TEXT, isManager);
+        final String firstNameLabel = String.format("%s %s", FIRST_NAME_LABEL_TEXT, firstName);
+        final String middleInitialLabel = String.format("%s %s", MIDDLE_INITIAL_LABEL_TEXT, middleInitial);
+        final String lastNameLabel = String.format("%s %s", LAST_NAME_LABEL_TEXT, lastName);
+        final String userLabel = String.format("%s %s", USERNAME_LABEL_TEXT, username);
+        final String hoursLabel = String.format("%s %s", HOURS_WORKED_LABEL_TEXT, 0);
+
+        employeeNameLabel.setText(nameLabel);
+        employeeFNameLabel.setText(firstNameLabel);
+        employeeMInitLabel.setText(middleInitialLabel);
+        employeeLNameLabel.setText(lastNameLabel);
+        usernameLabel.setText(userLabel);
+        isManagerLabel.setText(managerLabel);
+        hoursWorkedLabel.setText(hoursLabel);
     }
 
     @Override

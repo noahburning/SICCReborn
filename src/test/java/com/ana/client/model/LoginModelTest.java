@@ -126,15 +126,15 @@ public class LoginModelTest {
 
     @Test
     public void testLoginAndValidateCredentials() {
-        // set up the test
+        // username and password
         final String USERNAME = "fjones";
         final String PASSWORD = "ValidPassw0rd";
 
-        // perform the test
+        // act
         boolean validation = loginModel.validateCredentials(USERNAME, PASSWORD);
         boolean result = loginModel.login(USERNAME, PASSWORD);
 
-        // assert that the results are true as expected
+        // assert all results
         assertAll("TestLoginAndValidateCredentials",
                 () -> assertTrue(validation),
                 () -> assertTrue(result));

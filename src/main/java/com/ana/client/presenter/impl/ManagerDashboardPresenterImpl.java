@@ -18,7 +18,6 @@ public class ManagerDashboardPresenterImpl implements LogoutListener, LookupList
     private static final Logger logger = LoggerFactory.getLogger(ManagerDashboardPresenterImpl.class);
 
     private final Navigator navigator;
-
     private final ManagerDashboardModel managerDashboardModel;
     private final ManagerDashboardView managerDashboardView;
 
@@ -55,11 +54,6 @@ public class ManagerDashboardPresenterImpl implements LogoutListener, LookupList
             final String message = String.format("Employee with ID: %d found!", id);
             logger.info(message);
 
-            // save Employee context
-
-
-
-
             managerDashboardView.showEmployeeFound();
         });
 
@@ -71,8 +65,6 @@ public class ManagerDashboardPresenterImpl implements LogoutListener, LookupList
             // show the label: "Employee not found!"
             managerDashboardView.showEmployeeNotFound();
         }
-
-
 
     }
 

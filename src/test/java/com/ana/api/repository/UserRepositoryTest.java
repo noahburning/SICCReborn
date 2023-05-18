@@ -10,24 +10,30 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 public class UserRepositoryTest {
 
+    private final static String USERNAME = "crtoro13";
+    private final static String PASSWORD = "ValidPassword1";
+    private final static String FIRST_NAME = "Cristiano";
+    private final static String MIDDLE_INITIAL = "R";
+    private final static String LAST_NAME = "Ronaldo";
+
     @Autowired
     private UserRepository userRepository;
 
     @Test
     public void testFindUserById() throws Exception {
         User user = new User();
-        user.setUsername("crtoro13"); // must be unique and longer than 5 characters (6-30)
-        user.setPassword("ValidPassword1");
-        user.setFirstName("Cristiano");
-        user.setMiddleInitial("R");
-        user.setLastName("Ronaldo");
+        user.setUsername(USERNAME);
+        user.setPassword(PASSWORD);
+        user.setFirstName(FIRST_NAME);
+        user.setMiddleInitial(MIDDLE_INITIAL);
+        user.setLastName(LAST_NAME);
 
         userRepository.save(user);
 
         User findUser = userRepository.findById(user.getId()).orElse(null);
 
         assertNotNull(findUser);
-        assertEquals("crtoro13", findUser.getUsername());
+        assertEquals(USERNAME, findUser.getUsername());
 
         userRepository.delete(user);
     }
@@ -35,18 +41,18 @@ public class UserRepositoryTest {
     @Test
     public void testFindByUsername() throws Exception {
         User user = new User();
-        user.setUsername("crtoro13");
-        user.setPassword("ValidPassword1");
-        user.setFirstName("Cristiano");
-        user.setMiddleInitial("R");
-        user.setLastName("Ronaldo");
+        user.setUsername(USERNAME);
+        user.setPassword(PASSWORD);
+        user.setFirstName(FIRST_NAME);
+        user.setMiddleInitial(MIDDLE_INITIAL);
+        user.setLastName(LAST_NAME);
 
         userRepository.save(user);
 
-        User findUser = userRepository.findByUsername("crtoro13").orElse(null);
+        User findUser = userRepository.findByUsername(USERNAME).orElse(null);
 
         assertNotNull(findUser);
-        assertEquals("crtoro13", findUser.getUsername());
+        assertEquals(USERNAME, findUser.getUsername());
 
         userRepository.delete(user);
     }
