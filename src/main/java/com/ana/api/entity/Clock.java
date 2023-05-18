@@ -11,14 +11,14 @@ public class Clock {
     @Column(name = "clock_id", nullable = false)
     private Long clockId;
 
-    @Column(name = "user_id")
+    @Column(name = "userId")
     private Long userId;
 
     @Column(name = "clockInTime")
     private String clockInTime;
 
     @Column(name = "clockOutTime")
-    private String clockOutTime;
+    private String clockOutTime = null;
 
     @Column(name = "hours_worked")
     private Double hoursWorked;
