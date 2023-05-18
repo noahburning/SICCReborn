@@ -17,8 +17,15 @@ import java.util.Optional;
 @Service
 public class ClockService {
 
+    private final ClockRepository clockRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Autowired
-    private ClockRepository clockRepository;
+    public ClockService(ClockRepository clockRepository) {
+        this.clockRepository = clockRepository;
+    }
 
     @Transactional
     public Optional<Clock> getById(Long clockId) {
@@ -51,9 +58,6 @@ public class ClockService {
     public List<Clock> getAllClocks() {
         return (List<Clock>) clockRepository.findAll();
     }
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Transactional
     public void updateClockInTimeByUserIdAndTime(Long userId, LocalDateTime currentTime) {
