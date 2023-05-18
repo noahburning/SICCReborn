@@ -4,6 +4,7 @@ import com.ana.api.entity.User;
 import com.ana.client.model.ManagerDashboardModel;
 import com.ana.client.utility.EmployeeContext;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +71,9 @@ public class ManagerDashboardModelImpl implements ManagerDashboardModel {
         String minit = user.getMiddleInitial();
         String lname = user.getLastName();
         String username = user.getUsername();
-        boolean is_mgr = user.isManager();
+        JsonObject json = gson.fromJson(response.getBody(), JsonObject.class);
+        json.get("manager").getAsBoolean();
+        boolean is_mgr = json.get("manager").getAsBoolean();
 
         EmployeeContext.SaveEmployeeContext(ident.orElse(0L), fname, minit, lname, username, is_mgr);
 

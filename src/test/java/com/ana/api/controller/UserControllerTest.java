@@ -15,6 +15,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @SpringBootTest
 public class UserControllerTest {
 
+    private final static String USERNAME = "crtoro13";
+    private final static String PASSWORD = "ValidPassword1";
+    private final static String FIRST_NAME = "Cristiano";
+    private final static String MIDDLE_INITIAL = "R";
+    private final static String LAST_NAME = "Ronaldo";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -25,18 +31,18 @@ public class UserControllerTest {
     public void testGetUserByIdMapping() throws Exception
     {
         User user = new User();
-        user.setUsername("crtoro13");
-        user.setPassword("ValidPassword1");
-        user.setFirstName("Cristiano");
-        user.setMiddleInitial("R");
-        user.setLastName("Ronaldo");
+        user.setUsername(USERNAME);
+        user.setPassword(PASSWORD);
+        user.setFirstName(FIRST_NAME);
+        user.setMiddleInitial(MIDDLE_INITIAL);
+        user.setLastName(LAST_NAME);
 
         userRepository.save(user);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/users").param("id", String.valueOf(user.getId())))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("cr7"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value(USERNAME));
 
         userRepository.delete(user);
     }
@@ -45,11 +51,11 @@ public class UserControllerTest {
     public void testGetUserByUsernameMapping() throws Exception
     {
         User user = new User();
-        user.setUsername("cr7");
-        user.setPassword("ValidPassword1");
-        user.setFirstName("Cristiano");
-        user.setMiddleInitial("R");
-        user.setLastName("Ronaldo");
+        user.setUsername(USERNAME);
+        user.setPassword(PASSWORD);
+        user.setFirstName(FIRST_NAME);
+        user.setMiddleInitial(MIDDLE_INITIAL);
+        user.setLastName(LAST_NAME);
 
         userRepository.save(user);
 
@@ -57,7 +63,7 @@ public class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get(url))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("cr7"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value(USERNAME));
 
         userRepository.delete(user);
     }
