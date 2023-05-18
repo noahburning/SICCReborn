@@ -13,13 +13,13 @@ public class ClockInViewImpl extends JPanel implements ClockInView {
 
     private JButton clockInButton;
     private JButton clockOutButton;
-    private JButton returnButton; // New button
+    private JButton returnButton;
     private ClockInListener clockInListener;
 
     private ReturnListener returnListener;
 
     public ClockInViewImpl() {
-        setLayout(new BorderLayout()); // Change layout to BorderLayout
+        setLayout(new BorderLayout());
         JLabel titleLabel = new JLabel("Don't forget to take breaks and wash your hands frequently.");
         titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 24)); // Set font size to 24
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
