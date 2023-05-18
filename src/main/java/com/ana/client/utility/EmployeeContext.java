@@ -10,7 +10,6 @@ public class EmployeeContext {
     private final static Logger logger = LoggerFactory.getLogger(UserContext.class);
 
     private static Long employeeId;
-
     private static String firstName;
     private static String middleInitial;
     private static String lastName;
