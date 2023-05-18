@@ -49,7 +49,7 @@ public class ClockService {
 
     @Transactional
     public List<Clock> getAllClocks() {
-        return clockRepository.findAll();
+        return (List<Clock>) clockRepository.findAll();
     }
 
     @PersistenceContext

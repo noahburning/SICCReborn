@@ -3,11 +3,10 @@ package com.ana.client.gui;
 import com.ana.api.service.ClockService;
 import com.ana.api.service.UserService;
 import com.ana.client.model.LoginModel;
+import com.ana.client.model.ManagerDashboardModel;
 import com.ana.client.model.impl.LoginModelImpl;
-import com.ana.client.presenter.impl.AccessPOSPresenterImpl;
-import com.ana.client.presenter.impl.ClockInPresenterImpl;
-import com.ana.client.presenter.impl.EmployeeDashboardPresenterImpl;
-import com.ana.client.presenter.impl.LoginPresenterImpl;
+import com.ana.client.model.impl.ManagerDashboardModelImpl;
+import com.ana.client.presenter.impl.*;
 import com.ana.client.view.*;
 import com.ana.client.view.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +89,8 @@ public class ClientFrame extends JFrame {
 
     private void addManagerDashboardView() {
         ManagerDashboardView managerDashboardView = new ManagerDashboardViewImpl();
+        ManagerDashboardModel managerDashboardModel = new ManagerDashboardModelImpl(restTemplate);
+        new ManagerDashboardPresenterImpl(managerDashboardModel, managerDashboardView, navigator);
 
         JPanel managerDashboardWrapper = new JPanel(new GridBagLayout());
         managerDashboardWrapper.add((JPanel) managerDashboardView);
@@ -100,7 +101,6 @@ public class ClientFrame extends JFrame {
     private void addClockInView() {
         ClockInView clockInView = new ClockInViewImpl();
         new ClockInPresenterImpl(clockInView, navigator, userService, clockService);
-
 
         JPanel wrapper = new JPanel(new GridBagLayout());
         wrapper.add((JPanel) clockInView);

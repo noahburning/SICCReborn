@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 public class LoginController {
 
-    final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private final static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private UserService userService;
@@ -28,7 +28,7 @@ public class LoginController {
         Optional<User> user = userService.getByUsername(request.getUsername());
 
         final String REQ_MSG = String.format("Login request received. Username: {%s}, Password: {%s}", request.getUsername(), request.getPassword());
-        System.out.println(REQ_MSG);
+        logger.info(REQ_MSG);
 
         if(user.isEmpty()) {
             final String MSG = String.format("Did not find that user! Username: {%s}", request.getUsername());

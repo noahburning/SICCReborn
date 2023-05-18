@@ -1,24 +1,33 @@
 package com.ana.client.view.impl;
 
 import com.ana.client.listener.LogoutListener;
+import com.ana.client.listener.LookupListener;
+import com.ana.client.utility.EmployeeContext;
 import com.ana.client.view.ManagerDashboardView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboardView {
 
-    public static final String FIRST_NAME_LABEL_TEXT = "First Name: [Placeholder]";
-    public static final String MIDDLE_INITIAL_LABEL_TEXT = "Middle Initial: [Placeholder]";
-    public static final String LAST_NAME_LABEL_TEXT = "Last Name: [Placeholder]";
-    public static final String USERNAME_LABEL_TEXT = "Username: [Placeholder]";
-    public static final String IS_MANAGER_LABEL_TEXT = "Manager: [Placeholder]";
-    public static final String HOURS_WORKED_LABEL_TEXT = "Hours Worked: [Placeholder]";
-    public static final String EMPLOYEE_ID_LABEL_TEXT = "Enter Employee ID:";
+    private static final Logger logger = LoggerFactory.getLogger(ManagerDashboardViewImpl.class);
+
+    private static final String FIRST_NAME_LABEL_TEXT = "First Name: [Placeholder]";
+    private static final String MIDDLE_INITIAL_LABEL_TEXT = "Middle Initial: [Placeholder]";
+    private static final String LAST_NAME_LABEL_TEXT = "Last Name: [Placeholder]";
+    private static final String USERNAME_LABEL_TEXT = "Username: [Placeholder]";
+    private static final String IS_MANAGER_LABEL_TEXT = "Manager: [Placeholder]";
+    private static final String HOURS_WORKED_LABEL_TEXT = "Hours Worked: [Placeholder]";
+    private static final String EMPLOYEE_ID_LABEL_TEXT = "Enter Employee ID:";
     private static final String EDIT_BUTTON_TEXT = "Edit";
     private static final String LOGOUT_BUTTON_TEXT = "Logout";
-    private static final String DASHBOARD_LABEL_TEXT = "Manager Employee by ID";
+    private static final String DASHBOARD_LABEL_TEXT = "Manage Employee by ID";
     private static final String EMPLOYEE_NAME_LABEL_TEXT = "Employee: [Placeholder]";
+    private static final String SEARCH_BUTTON_TEXT = "Lookup";
+    private static final String EMPLOYEE_NOT_FOUND_LABEL_TEXT = "Employee Not Found!";
+
     private JButton logoutButton;
     private JButton editButton1;
     private JButton editButton2;
@@ -36,6 +45,8 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
     private JButton editButton6;
     private JLabel employeeIDLabel;
     private JTextField employeeIDTextField;
+    private JButton searchButton;
+    private JLabel foundEmployeeLabel;
 
     public ManagerDashboardViewImpl() {
         final int X_DIM = 950;
@@ -58,6 +69,7 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
         editButton4 = new JButton(EDIT_BUTTON_TEXT);
         editButton5 = new JButton(EDIT_BUTTON_TEXT);
         editButton6 = new JButton(EDIT_BUTTON_TEXT);
+        searchButton = new JButton(SEARCH_BUTTON_TEXT);
 
         // JLabels
         dashboardLabel = new JLabel(DASHBOARD_LABEL_TEXT);
@@ -69,6 +81,8 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
         isManagerLabel = new JLabel(IS_MANAGER_LABEL_TEXT);
         hoursWorkedLabel = new JLabel(HOURS_WORKED_LABEL_TEXT);
         employeeIDLabel = new JLabel(EMPLOYEE_ID_LABEL_TEXT);
+        foundEmployeeLabel = new JLabel(EMPLOYEE_NOT_FOUND_LABEL_TEXT);
+        foundEmployeeLabel.setVisible(false);
 
         // JTextFields
         employeeIDTextField = new JTextField(10);
@@ -93,6 +107,8 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
         add(editButton6);
         add(employeeIDLabel);
         add(employeeIDTextField);
+        add(searchButton);
+        add(foundEmployeeLabel);
     }
 
     private void setBounds() {
@@ -113,11 +129,56 @@ public class ManagerDashboardViewImpl extends JPanel implements ManagerDashboard
         editButton6.setBounds(315, 275, 100, 20);
         employeeIDLabel.setBounds(50, 350, 125, 25);
         employeeIDTextField.setBounds(175, 350, 130, 25);
+        searchButton.setBounds(315, 350, 100, 25);
+        foundEmployeeLabel.setBounds(430, 350, 200, 25);
+    }
+
+    private String getEmployeeID() {
+        return employeeIDTextField.getText().trim();
+    }
+
+    private void clearEmployeeID() {
+        employeeIDTextField.setText("");
+    }
+
+    public void showEmployeeNotFound() {
+        foundEmployeeLabel.setVisible(true);
+    }
+
+    @Override
+    public void showEmployeeFound() {
+        foundEmployeeLabel.setVisible(false);
+
+        // also, show the employee info
+        // get from Employee Context
+        long id = EmployeeContext.getEmployeeId();
+        String firstName = EmployeeContext.getFirstName();
+        String middleInitial = EmployeeContext.getMiddleInitial();
+        String lastName = EmployeeContext.getLastName();
+        String username = EmployeeContext.getUsername();
+        boolean isManager = EmployeeContext.getIsManager();
+
+        employeeNameLabel.setText("Employee: " + firstName + " " + middleInitial + " " + lastName);
+        employeeFNameLabel.setText("First Name: " + firstName);
+        employeeMInitLabel.setText("Middle Initial: " + middleInitial);
+        employeeLNameLabel.setText("Last Name: " + lastName);
+        usernameLabel.setText("Username: " + username);
+        isManagerLabel.setText("Is Manager: " + isManager);
+        hoursWorkedLabel.setText("Hours Worked: " + 0);
     }
 
     @Override
     public void setLogoutListener(LogoutListener listener){
         logoutButton.addActionListener(e -> listener.onLogout());
+    }
+
+    @Override
+    public void setLookupListener(LookupListener listener) {
+        logger.info("Employee ID is {}", getEmployeeID());
+        searchButton.addActionListener(e -> {
+            listener.onLookup(getEmployeeID());
+            clearEmployeeID();
+        });
     }
 
 }
