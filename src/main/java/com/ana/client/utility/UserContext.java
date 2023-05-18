@@ -4,6 +4,8 @@ public class UserContext {
 
     private static String username;
 
+    private static boolean isManager;
+
     public static String getUsername() {
         return username;
     }
@@ -12,4 +14,13 @@ public class UserContext {
         System.out.println("The username entered and locally saved was " + username);
         UserContext.username = username;
     }
+
+    public static boolean getIsManager() {
+        return isManager;
+    }
+
+    public static void setIsManager(boolean isManager) {
+        UserContext.isManager = isManager;
+    }
+
 }

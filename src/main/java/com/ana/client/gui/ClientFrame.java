@@ -75,7 +75,7 @@ public class ClientFrame extends JFrame {
         loginWrapper.add((JPanel) loginView);
 
         navigator.addView(ViewType.LOGIN.toString(), loginWrapper);
-        //navigator.showView(ViewType.LOGIN.toString());
+        navigator.showView(ViewType.LOGIN.toString());
     }
 
     private void addEmployeeDashboardView() {
@@ -95,7 +95,6 @@ public class ClientFrame extends JFrame {
         managerDashboardWrapper.add((JPanel) managerDashboardView);
 
         navigator.addView(ViewType.MANAGER_DASHBOARD.toString(), managerDashboardWrapper);
-        navigator.showView(ViewType.MANAGER_DASHBOARD.toString());
     }
 
     private void addClockInView() {
