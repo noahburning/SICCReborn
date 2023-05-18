@@ -5,4 +5,5 @@ public interface ClockInPresenter {
     void clockIn();
 
     void clockOut();
+
 }

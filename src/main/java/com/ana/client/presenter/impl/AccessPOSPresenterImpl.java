@@ -20,4 +20,5 @@ public class AccessPOSPresenterImpl implements AccessPOSPresenter, ReturnListene
     public void onReturn() {
         navigator.showView(ViewType.EMPLOYEE_DASHBOARD.toString());
     }
+
 }

@@ -14,7 +14,7 @@ import javax.persistence.*;
  *             <th>username</th>
  *             <th>password</th>
  *             <th>is_manager</th>
- *             <th>manager_id</th>
+ *             <th>mgr_id</th>
  *         </tr>
  *     </thead>
  *     <tbody>
