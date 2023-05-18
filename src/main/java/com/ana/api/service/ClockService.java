@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -19,7 +20,7 @@ public class ClockService {
 
     private final ClockRepository clockRepository;
 
-    @PersistenceContext
+    @Autowired
     private EntityManager entityManager;
 
     @Autowired
@@ -37,10 +38,6 @@ public class ClockService {
         return clockRepository.save(clock);
     }
 
-    @Transactional
-    public Clock updateClock(Clock clock) {
-        return clockRepository.save(clock);
-    }
 
     @Transactional
     public boolean deleteClock(Long clockId) {
@@ -59,26 +56,39 @@ public class ClockService {
         return (List<Clock>) clockRepository.findAll();
     }
 
-    @Transactional
-    public void updateClockInTimeByUserIdAndTime(Long userId, LocalDateTime currentTime) {
-        String jpql = "UPDATE Clock c SET c.clockInTime = :currentTime WHERE c.userId = :userId";
-        Query query = entityManager.createQuery(jpql);
-        query.setParameter("currentTime", currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        query.setParameter("userId", userId);
-        query.executeUpdate();
-    }
+
 
     @Transactional
-    public void updateClockOutTimeByUserIdAndTime(Long userId, LocalDateTime currentTime) {
-        String jpql = "UPDATE Clock c SET c.clockOutTime = :currentTime WHERE c.userId = :userId";
-        Query query = entityManager.createQuery(jpql);
-        query.setParameter("currentTime", currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+    public Long findLastClockIdByUserId(Long userId) {
+        String jpql = "SELECT c.clockId FROM Clock c WHERE c.userId = :userId ORDER BY c.clockInTime DESC";
+        TypedQuery<Long> query = entityManager.createQuery(jpql, Long.class);
         query.setParameter("userId", userId);
-        query.executeUpdate();
+        query.setMaxResults(1);
+
+        List<Long> results = query.getResultList();
+        if (!results.isEmpty()) {
+            return results.get(0);
+        } else {
+            return null;
+        }
     }
 
+
+
     @Transactional
-    public Optional<Clock> getLatestClockByUserId(Long userId) {
-        return clockRepository.findFirstByUserIdOrderByClockInTimeDesc(userId);
+    public Clock updateClockOutTimeByClockIdAndTime(Long clockId, LocalDateTime placeholder) {
+        Optional<Clock> existingClock = clockRepository.findById(clockId);
+
+        if (existingClock.isPresent()) {
+            Clock clock = existingClock.get();
+            LocalDateTime currentTime = LocalDateTime.now();
+            clock.setClockOutTime(currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            return clockRepository.save(clock);
+        } else {
+            throw new NoSuchElementException("Clock not found with ID: " + clockId);
+        }
     }
+
+
+
 }

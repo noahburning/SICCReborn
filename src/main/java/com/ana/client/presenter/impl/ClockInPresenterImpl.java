@@ -21,6 +21,8 @@ public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, 
     private final ClockInView clockInView;
     private final Navigator navigator;
 
+    @Autowired
+
     private final ClockModel clockModel;
 
     public UserContext userContext;
@@ -28,10 +30,11 @@ public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, 
     public String localUser;
 
 
-    public ClockInPresenterImpl(ClockInView clockInView, Navigator navigator, ClockModel clockModel) {
+    public ClockInPresenterImpl(ClockInView clockInView, Navigator navigator, ClockModel clockModel, UserContext userContext) {
         this.clockInView = clockInView;
         this.navigator = navigator;
-        this.clockModel = clockModel; // Assign the ClockModel instance to the corresponding field
+        this.clockModel = clockModel;
+        this.userContext = userContext;
         this.clockInView.setClockInListener(this);
         this.clockInView.setReturnListener(this);
     }
@@ -65,37 +68,49 @@ public class ClockInPresenterImpl implements ClockInPresenter, ClockInListener, 
 
     @Override
     public void clockOut() {
-        // Get the current user ID
+        String localUser = userContext.getUsername();
         Long currentUserId = clockModel.getUserIdByUsername(localUser);
-        Optional<Clock> latestClock = clockModel.getLatestClockByUserId(currentUserId);
-        if (latestClock.isPresent()) {
-            Clock clock = latestClock.get();
+        System.out.println("The current user id is: " + currentUserId + "\n\n\n");
 
-            // Get the current date and time
-            LocalDateTime now = getCurrentDateTime();
+        Long latestClockId = clockModel.findLastClockIdByUserId(currentUserId);
 
-            String clockOutTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        System.out.println("The current clock id is: " + latestClockId + "\n\n\n");
 
-            // Update the clock entry with the clockOutTime
-            clock.setClockOutTime(clockOutTime);
-            Clock updatedClock = clockModel.updateClock(clock);
-
-            // Show success message
+        LocalDateTime now = getCurrentDateTime();
+        if (latestClockId != null) {
+            clockModel.updateClockOutTimeByClockIdAndTime(latestClockId, now);
             clockInView.showClockOutMessage();
         } else {
-            // No clock in entry found, handle the error
+            // Handle the case when no clock-in entry is found
         }
     }
+
+    @Override
+    public void onClockOut() {
+        LocalDateTime now = getCurrentDateTime();
+        clockOut(now);
+    }
+
+    private void clockOut(LocalDateTime currentTime) {
+        String localUser = userContext.getUsername();
+        Long currentUserId = clockModel.getUserIdByUsername(localUser);
+        System.out.println("The current user id is: " + currentUserId + "\n\n\n");
+
+        Long latestClockId = clockModel.findLastClockIdByUserId(currentUserId);
+
+        System.out.println("The current clock id is: " + latestClockId + "\n\n\n");
+
+        clockModel.updateClockOutTimeByClockIdAndTime(latestClockId, currentTime);
+        clockInView.showClockOutMessage();
+    }
+
+
 
     @Override
     public void onClockIn() {
         clockIn();
     }
 
-    @Override
-    public void onClockOut() {
-        clockOut();
-    }
 
     @Override
     public void onClockInOut() {

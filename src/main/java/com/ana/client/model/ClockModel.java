@@ -2,6 +2,7 @@ package com.ana.client.model;
 
 import com.ana.api.entity.Clock;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ public interface ClockModel {
      * @param userId the ID of the user
      * @return an optional containing the latest clock entry, or empty if not found
      */
-    Optional<Clock> getLatestClockByUserId(Long userId);
+    Long findLastClockIdByUserId(Long userId);
 
     /**
      * Creates a new clock entry.
@@ -29,21 +30,7 @@ public interface ClockModel {
      * @param clock the clock entry to update
      * @return the updated clock entry
      */
-    Clock updateClock(Clock clock);
 
-    /**
-     * Retrieves all clock entries for the specified user ID.
-     *
-     * @param userId the ID of the user
-     * @return a list of clock entries
-     */
-    List<Clock> getAllClocksByUserId(Long userId);
-
-    /**
-     * Retrieves the user ID associated with the given username.
-     *
-     * @param username the username of the user
-     * @return the user ID if found, null otherwise
-     */
     Long getUserIdByUsername(String username);
+    void updateClockOutTimeByClockIdAndTime(Long clockId, LocalDateTime currentTime);
 }

@@ -1,6 +1,8 @@
 package com.ana.client.gui;
 
+import com.ana.api.entity.User;
 import com.ana.api.service.ClockService;
+import com.ana.api.repository.ClockRepository;
 import com.ana.api.service.UserService;
 import com.ana.client.model.ClockModel;
 import com.ana.client.model.LoginModel;
@@ -16,6 +18,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
+import com.ana.client.utility.UserContext;
+
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,6 +47,7 @@ public class ClientFrame extends JFrame {
 
     protected final Navigator navigator;
     private final RestTemplate restTemplate;
+    public UserContext userContext;
 
     @Autowired
     private UserService userService;
@@ -100,11 +107,17 @@ public class ClientFrame extends JFrame {
         navigator.addView(ViewType.MANAGER_DASHBOARD.toString(), managerDashboardWrapper);
     }
 
+    @Autowired
+    private ClockRepository clockRepository;
+
+    @Autowired
+    private EntityManager entityManager;
+
     private void addClockInView() {
         ClockInView clockInView = new ClockInViewImpl();
-        ClockModel clockModel = new ClockModelImpl(restTemplate, BASE_URL);
+        ClockModel clockModel = new ClockModelImpl(restTemplate, BASE_URL, entityManager, clockRepository);
 
-        new ClockInPresenterImpl(clockInView, navigator, clockModel);
+        new ClockInPresenterImpl(clockInView, navigator, clockModel, userContext);
 
         JPanel wrapper = new JPanel(new GridBagLayout());
         wrapper.add((JPanel) clockInView);

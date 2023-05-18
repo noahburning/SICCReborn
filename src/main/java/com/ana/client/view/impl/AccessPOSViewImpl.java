@@ -13,18 +13,18 @@ public class AccessPOSViewImpl extends JPanel implements AccessPOSView {
 
     public AccessPOSViewImpl() {
         setPreferredSize(new Dimension(944, 569));
-        setLayout(null);  // using null layout for absolute positioning
+        setLayout(null);
 
         // Create a label
         JLabel posLabel = new JLabel("Point of Sales Terminal");
         posLabel.setFont(posLabel.getFont().deriveFont(Font.BOLD, 16));
-        posLabel.setBounds(400, 0, 300, 20); // set bounds as per the second component in MyPanel
+        posLabel.setBounds(400, 0, 300, 20);
         add(posLabel);
 
         // Create a return button
         returnButton = new JButton("Return");
         returnButton.setFont(returnButton.getFont().deriveFont(Font.BOLD, 16));
-        returnButton.setBounds(0, 0, 125, 35); // set bounds as per the first component in MyPanel
+        returnButton.setBounds(0, 0, 125, 35);
         add(returnButton);
 
         returnButton.addActionListener(e -> {
