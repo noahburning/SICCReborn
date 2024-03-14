@@ -18,7 +18,7 @@ public class LoginTest {
         String enteredPassword = "SiccAna2023";
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB", "admin", "Dragonfly-Laurel-Serpent0-Purse-Scapegoat");
+            conn = DriverManager.getConnection("jdbc:mysql://34.102.94.32:3306/cookieDB", "root", "1234");
 
             System.out.println("Connection established!");
 
@@ -51,7 +51,7 @@ public class LoginTest {
         String enteredPassword = "wrongpassword";
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://siccbyana.ce2z68ofp2mx.us-east-1.rds.amazonaws.com:3306/cookieShopDB", "admin", "Dragonfly-Laurel-Serpent0-Purse-Scapegoat");
+            conn = DriverManager.getConnection("jdbc:mysql://34.102.94.32:3306/cookieDB", "root", "1234");
 
             System.out.println("Connection established!");
 
